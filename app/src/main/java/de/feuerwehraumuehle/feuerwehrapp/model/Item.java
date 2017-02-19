@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Item implements Serializable {
     private String name;
     private String fullPath;
-    private ItemType type;
+    private FFileType type;
 
     public String getName() {
         return name;
@@ -27,11 +27,11 @@ public class Item implements Serializable {
         this.fullPath = fullPath;
     }
 
-    public ItemType getType() {
+    public FFileType getType() {
         return type;
     }
 
-    public void setType(ItemType type) {
+    public void setType(FFileType type) {
         this.type = type;
     }
 }

@@ -6,35 +6,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import de.feuerwehraumuehle.feuerwehrapp.R;
-import de.feuerwehraumuehle.feuerwehrapp.model.Category;
-import de.feuerwehraumuehle.feuerwehrapp.model.Item;
+import de.feuerwehraumuehle.feuerwehrapp.model.FFile;
 
 /**
  * Created by Matze on 18.02.2017.
  */
 
-public class ItemAdapter extends BaseAdapter {
+public class FFileAdapter extends BaseAdapter {
     private Context mContext;
-    private ArrayList<Item> items;
+    private FFile FDirectory;
 
-    public ItemAdapter(Context c, ArrayList<Item> items) {
+    public FFileAdapter(Context c, FFile FDirectory) {
         mContext = c;
-        this.items = items;
+        this.FDirectory = FDirectory;
     }
 
     public int getCount() {
-        return items.size();
+        return FDirectory.getChildren().size();
     }
 
-    public Item getItem(int position) {
-        return items.get(position);
+    public FFile getItem(int position) {
+        return FDirectory.getChildren().get(position);
     }
 
     public long getItemId(int position) {
@@ -46,8 +45,8 @@ public class ItemAdapter extends BaseAdapter {
         View view;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.category_item, null);
-
+            view = inflater.inflate(R.layout.ffile_item, null);
+            view.setLayoutParams(new GridView.LayoutParams(GridView.AUTO_FIT, 600));
         } else {
             view = convertView;
         }

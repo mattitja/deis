@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="de.feuerwehraumuehle.feuerwehrapp.EmptyActivity">
+    tools:context="de.feuerwehraumuehle.feuerwehrapp.EmptyActivity"
+    android:background="#000000">
 
     <TextView
         android:id="@+id/msg"
@@ -16,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text=""
+        android:textColor="@android:color/white"
         android:textSize="30dp" />
 
 </FrameLayout>

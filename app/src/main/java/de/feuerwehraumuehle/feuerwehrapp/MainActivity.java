@@ -44,11 +44,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, EmptyActivity.class);
             String msg = "";
             String sdcardPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-            if (e instanceof FileManager.StartFolderContainsNoItems) {
-                msg = sdcardPath + "/feuerwehr/ beinhaltet keine Items.";
-            } else {
-                msg = sdcardPath + "/feuerwehr/ beinhaltet keine Items.";
-            }
+            msg = sdcardPath + "/feuerwehr existiert nicht oder beinhaltet nichts.";
             intent.putExtra("msg", msg);
             startActivity(intent);
             finish();

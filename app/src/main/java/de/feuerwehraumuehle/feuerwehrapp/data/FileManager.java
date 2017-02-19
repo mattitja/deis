@@ -6,6 +6,7 @@ import android.os.Environment;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 
 import de.feuerwehraumuehle.feuerwehrapp.helper.CfgParser;
@@ -54,11 +55,13 @@ public class FileManager {
         }
         // CFG Handling
 
+        HashMap<String, CfgParser.Configuration> cfgs = new HashMap<>();
+
         for (File file : files) {
             if (file.getName().toUpperCase().endsWith(".CFG")) {
                 CfgParser parser = new CfgParser();
-                List parse = parser.parse(file);
-                parse.get(0);
+                CfgParser.Configuration config = parser.parse(file);
+                cfgs.put(file.getName().substring(0, file.getName().indexOf(".")), config);
             }
         }
         for (File file : files) {
@@ -81,6 +84,12 @@ public class FileManager {
                     name = name.substring(0, i);
                 }
                 newFFile.setName(name);
+                if (cfgs.containsKey(name)) {
+                    CfgParser.Configuration configuration = cfgs.get(name);
+                    newFFile.setColor(configuration.color);
+                    newFFile.setName(configuration.alternativeName != null ? configuration.alternativeName : newFFile
+                            .getName());
+                }
                 if (newFFile.getType() != FFileType.UNDEFINED) {
                     currentFDirectory.addChildren(newFFile);
                 }

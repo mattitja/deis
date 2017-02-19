@@ -11,6 +11,7 @@ public class FFile {
     private String absolutePath;
     private FFileType type;
     private ArrayList<FFile> children;
+    private String color;
 
     public FFile() {
         children = new ArrayList<>();
@@ -46,5 +47,13 @@ public class FFile {
 
     public void setType(FFileType type) {
         this.type = type;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getColor() {
+        return color;
     }
 }

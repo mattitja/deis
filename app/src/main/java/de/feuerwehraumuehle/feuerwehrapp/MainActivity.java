@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("items", categoryList.get(position));
+                bundle.putSerializable("items", categoryList.get(position).getItems());
                 Intent intent = new Intent(MainActivity.this, ItemListActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);

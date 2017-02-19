@@ -1,10 +1,12 @@
 package de.feuerwehraumuehle.feuerwehrapp.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Matze on 18.02.2017.
  */
 
-public class Item {
+public class Item implements Serializable {
     private String name;
     private String fullPath;
     private ItemType type;

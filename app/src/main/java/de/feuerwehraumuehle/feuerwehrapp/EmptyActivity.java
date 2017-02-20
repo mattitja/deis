@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import de.feuerwehraumuehle.feuerwehrapp.helper.Utils;
+
 public class EmptyActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_empty);
+        Utils.setStatusBarColor(this);
 
         String msg = getIntent().getStringExtra("msg");
         TextView tv = (TextView) findViewById(R.id.msg);

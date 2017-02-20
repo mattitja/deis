@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import de.feuerwehraumuehle.feuerwehrapp.adapter.FFileAdapter;
 import de.feuerwehraumuehle.feuerwehrapp.data.FileManager;
+import de.feuerwehraumuehle.feuerwehrapp.helper.Utils;
 import de.feuerwehraumuehle.feuerwehrapp.model.FFile;
 import de.feuerwehraumuehle.feuerwehrapp.model.FFileType;
 
@@ -26,10 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Window window = getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        Utils.setStatusBarColor(this);
 
         ArrayList<Integer> pos = getIntent().getIntegerArrayListExtra("pos");
         if (pos == null) {
@@ -44,7 +42,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, EmptyActivity.class);
             String msg = "";
             String sdcardPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-            msg = sdcardPath + "/feuerwehr existiert nicht oder beinhaltet nichts.";
+            msg = "Entweder " + sdcardPath + "/feuerwehr existiert nicht bzw. beinhaltet nichts oder " +
+                    "die " +
+                    "Berechtigung " +
+                    "\"Speicher\" muss erst noch in den App-Einstellungen gegeben werden.";
             intent.putExtra("msg", msg);
             startActivity(intent);
             finish();

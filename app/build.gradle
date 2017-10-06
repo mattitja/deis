@@ -24,8 +24,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.1'
-    compile 'com.android.support:design:25.1.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
     compile 'es.voghdev.pdfviewpager:library:1.0.1'
+    compile 'com.github.barteksc:android-pdf-viewer:2.7.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+    provided 'org.androidannotations:androidannotations:4.0.0'
+    compile 'org.androidannotations:androidannotations-api:4.0.0'
     testCompile 'junit:junit:4.12'
 }

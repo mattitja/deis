@@ -3,7 +3,7 @@
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -26,7 +26,11 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".EmptyActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".PDFnewActivity_"
+                  android:theme="@style/AppTheme.NoActionBar"
+                    android:screenOrientation="landscape">
+        </activity>
     </application>
 
 </manifest>

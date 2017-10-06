@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     posClone.clear();
                 } else if (fFile.getType() == FFileType.PDF) {
-                    Intent intent = new Intent(MainActivity.this, PDFActivity.class);
+                    Intent intent = new Intent(MainActivity.this, PDFnewActivity_.class);
                     intent.putExtra("pdf_path", fFile.getAbsolutePath());
                     startActivity(intent);
                 } else {

@@ -58,8 +58,11 @@ public class FFileAdapter extends BaseAdapter {
 		ImageView type = (ImageView) view.findViewById(R.id.category_type);
 		FFile item = getItem(position);
 		name.setText(item.getName());
+
 		int color = item.getColor() != null ? Color.parseColor(item.getColor()) : Color.argb(255, 255, 255, 255);
+		int textColor = item.getTextColor() != null ? Color.parseColor(item.getColor()) : Color.argb(255, 255, 255, 255);
 		container.setBackgroundColor(color);
+		name.setTextColor(textColor);
 		type.setImageDrawable(mContext.getResources().getDrawable(item.getType() == FFileType.DIRECTORY ? R.mipmap
 				.ic_folder_black_48dp : R
 				.mipmap

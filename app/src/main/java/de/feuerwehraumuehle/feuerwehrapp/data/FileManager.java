@@ -54,7 +54,6 @@ public class FileManager {
             return;
         }
         // CFG Handling
-
         HashMap<String, CfgParser.Configuration> cfgs = new HashMap<>();
 
         for (File file : files) {
@@ -87,6 +86,7 @@ public class FileManager {
                 if (cfgs.containsKey(name)) {
                     CfgParser.Configuration configuration = cfgs.get(name);
                     newFFile.setColor(configuration.color);
+                    newFFile.setTextColor(configuration.textColor);
                     newFFile.setName(configuration.alternativeName != null ? configuration.alternativeName : newFFile
                             .getName());
                 }

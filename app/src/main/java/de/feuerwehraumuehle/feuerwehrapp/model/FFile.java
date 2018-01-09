@@ -12,6 +12,7 @@ public class FFile {
     private FFileType type;
     private ArrayList<FFile> children;
     private String color;
+    private String textColor;
 
     public FFile() {
         children = new ArrayList<>();
@@ -55,5 +56,13 @@ public class FFile {
 
     public String getColor() {
         return color;
+    }
+
+    public String getTextColor() {
+        return textColor;
+    }
+
+    public void setTextColor(String textColor) {
+        this.textColor = textColor;
     }
 }

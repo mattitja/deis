@@ -6,11 +6,8 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.provider.OpenableColumns;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +17,6 @@ import android.widget.Toast;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
-import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 import com.shockwave.pdfium.PdfDocument;
 
 import org.androidannotations.annotations.AfterViews;
@@ -35,6 +31,7 @@ import java.io.File;
 import java.util.List;
 
 import de.feuerwehraumuehle.feuerwehrapp.helper.Utils;
+import de.feuerwehraumuehle.feuerwehrapp.view.CustomScrollHandle;
 
 @EActivity(R.layout.activity_pdfnew)
 @OptionsMenu(R.menu.options)
@@ -110,29 +107,47 @@ public class PDFnewActivity extends AppCompatActivity implements OnPageChangeLis
 		setTitle(pdfFileName);
 	}
 
+	CustomScrollHandle customScrollHandle;
+
 	private void displayFromAsset(String assetFileName) {
 		pdfFileName = assetFileName;
+
+		customScrollHandle = new CustomScrollHandle(this);
 
 		pdfView.fromAsset(assetFileName)
 				.defaultPage(pageNumber)
 				.onPageChange(this)
 				.enableAnnotationRendering(true)
 				.onLoad(this)
-				.scrollHandle(new DefaultScrollHandle(this))
+				.scrollHandle(customScrollHandle)
 				.spacing(10) // in dp
+				.onLoad(new OnLoadCompleteListener() {
+					@Override
+					public void loadComplete(int nbPages) {
+						customScrollHandle.setPageCount(pdfView.getPageCount());
+					}
+				})
 				.load();
 	}
 
 	private void displayFromUri(Uri uri) {
 		pdfFileName = getFileName(uri);
 
+		customScrollHandle = new CustomScrollHandle(this);
+
 		pdfView.fromUri(uri)
 				.defaultPage(pageNumber)
 				.onPageChange(this)
 				.enableAnnotationRendering(true)
 				.onLoad(this)
-				.scrollHandle(new DefaultScrollHandle(this))
+				.scrollHandle(customScrollHandle)
 				.spacing(10) // in dp
+				.onLoad(new OnLoadCompleteListener() {
+					@Override
+					public void loadComplete(int nbPages) {
+						customScrollHandle.setPageCount(pdfView.getPageCount());
+					}
+				})
 				.load();
 	}
 

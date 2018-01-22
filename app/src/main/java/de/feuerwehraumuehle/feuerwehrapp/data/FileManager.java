@@ -89,6 +89,7 @@ public class FileManager {
                     newFFile.setTextColor(configuration.textColor);
                     newFFile.setName(configuration.alternativeName != null ? configuration.alternativeName : newFFile
                             .getName());
+                    newFFile.setIconName(configuration.iconName);
                 }
                 if (newFFile.getType() != FFileType.UNDEFINED) {
                     currentFDirectory.addChildren(newFFile);

@@ -37,11 +37,13 @@ public class CfgParser {
 		public final String color;
 		public final String alternativeName;
         public final String textColor;
+        public final String iconName;
 
-		private Configuration(String color, String alternativeName, String textColor) {
+		private Configuration(String color, String alternativeName, String textColor, String iconName) {
 			this.color = color;
 			this.alternativeName = alternativeName;
             this.textColor = textColor;
+            this.iconName = iconName;
 		}
 	}
 
@@ -50,6 +52,7 @@ public class CfgParser {
 		String color = null;
 		String alternativeName = null;
         String textColor = null;
+        String iconName = null;
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
@@ -61,12 +64,14 @@ public class CfgParser {
 				alternativeName = readAttribute(parser, "alternativeName");
 			} else if (name.equals("textColor")) {
                 alternativeName = readAttribute(parser, "textColor");
-            } else{
+            } else if (name.equals("icon")) {
+				iconName = readAttribute(parser, "icon");
+			} else {
 				skip(parser);
 
 			}
 		}
-		return new Configuration(color, alternativeName, textColor);
+		return new Configuration(color, alternativeName, textColor, iconName);
 	}
 
 	private String readAttribute(XmlPullParser parser, String tag) throws IOException, XmlPullParserException {

@@ -54,8 +54,9 @@ public class FFileAdapter extends BaseAdapter {
 			view = convertView;
 		}
 		TextView name = (TextView) view.findViewById(R.id.category_name);
-		FrameLayout container = (FrameLayout) view.findViewById(R.id.category_container);
+		View container = view.findViewById(R.id.category_container);
 		ImageView type = (ImageView) view.findViewById(R.id.category_type);
+		ImageView icon = (ImageView) view.findViewById(R.id.icon);
 		FFile item = getItem(position);
 		name.setText(item.getName());
 
@@ -67,6 +68,16 @@ public class FFileAdapter extends BaseAdapter {
 				.ic_folder_black_48dp : R
 				.mipmap
 				.ic_picture_as_pdf_black_48dp));
+		if (item.getIconName() != null) {
+			int iconId = mContext.getResources().getIdentifier(item.getIconName(), "drawable",
+					mContext.getPackageName());
+			if (iconId != 0) {
+				icon.setImageDrawable(mContext.getDrawable(iconId));
+			}
+		} else {
+			icon.setImageDrawable(null);
+		}
+
 
 		return view;
 	}

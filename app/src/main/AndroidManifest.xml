@@ -28,8 +28,7 @@
             android:name=".EmptyActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".PDFnewActivity_"
-                  android:theme="@style/AppTheme.NoActionBar"
-                    android:screenOrientation="landscape">
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

@@ -30,10 +30,11 @@ public class FileManager {
 
     private FFile rootFFile;
 
-    private FileManager(Context context) throws StartFolderNotFoundException, StartFolderContainsNoItems {
+    private FileManager(Context context, String startFolderName) throws StartFolderNotFoundException,
+            StartFolderContainsNoItems {
         File externalStorageDirectory = Environment.getExternalStorageDirectory();
         String sdcardPath = externalStorageDirectory.getAbsolutePath();
-        File startFolder = new File(sdcardPath, "feuerwehr");
+        File startFolder = new File(sdcardPath, startFolderName);
         if (startFolder.isDirectory() && startFolder.listFiles().length == 0) {
             throw new StartFolderNotFoundException();
         } else if(startFolder.listFiles().length == 0) {

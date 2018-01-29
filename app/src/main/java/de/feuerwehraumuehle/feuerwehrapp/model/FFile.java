@@ -7,11 +7,11 @@ import java.util.ArrayList;
  */
 
 public class FFile {
-    private String name;
+    private String displayName;
     private String absolutePath;
     private FFileType type;
     private ArrayList<FFile> children;
-    private String color;
+    private String buttonColor;
     private String textColor;
     private String iconName;
 
@@ -19,12 +19,12 @@ public class FFile {
         children = new ArrayList<>();
     }
 
-    public String getName() {
-        return name;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public String getAbsolutePath() {
@@ -51,12 +51,12 @@ public class FFile {
         this.type = type;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setButtonColor(String buttonColor) {
+        this.buttonColor = buttonColor;
     }
 
-    public String getColor() {
-        return color;
+    public String getButtonColor() {
+        return buttonColor;
     }
 
     public String getTextColor() {

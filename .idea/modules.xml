@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FeuerwehrApp.iml" filepath="$PROJECT_DIR$/FeuerwehrApp.iml" />
+      <module fileurl="file://D:\workspaces\feuerwehr\FeuerwehrApp.iml" filepath="D:\workspaces\feuerwehr\FeuerwehrApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/feuerwehr.iml" filepath="$PROJECT_DIR$/feuerwehr.iml" />
     </modules>

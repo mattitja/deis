@@ -6,7 +6,10 @@ import android.os.Environment;
 import java.io.File;
 import java.util.HashMap;
 
-import de.feuerwehraumuehle.feuerwehrapp.helper.CfgParser;
+import de.feuerwehraumuehle.feuerwehrapp.helper.ColorConfiguration;
+import de.feuerwehraumuehle.feuerwehrapp.helper.ColorParser;
+import de.feuerwehraumuehle.feuerwehrapp.helper.ItemConfiguration;
+import de.feuerwehraumuehle.feuerwehrapp.helper.ItemParser;
 import de.feuerwehraumuehle.feuerwehrapp.model.FFile;
 import de.feuerwehraumuehle.feuerwehrapp.model.FFileType;
 
@@ -25,21 +28,32 @@ public class FileManager {
         return instance;
     }
 
+    public static ColorConfiguration colorMap;
+
     private FFile rootFFile;
 
     private FileManager(Context context) throws StartFolderNotFoundException,
             StartFolderContainsNoItems {
         File externalStorageDirectory = Environment.getExternalStorageDirectory();
         String sdcardPath = externalStorageDirectory.getAbsolutePath();
-        File startFolder = new File(sdcardPath, "feuerwehr/data");
-        if (startFolder.isDirectory() && startFolder.listFiles().length == 0) {
+        File dataStartFolder = new File(sdcardPath, "feuerwehr/data");
+        if (dataStartFolder.isDirectory() && dataStartFolder.listFiles().length == 0) {
             throw new StartFolderNotFoundException();
-        } else if(startFolder.listFiles().length == 0) {
+        } else if(dataStartFolder.listFiles().length == 0) {
             throw new StartFolderContainsNoItems();
         }
         rootFFile = new FFile();
 
-        scanDirectory(startFolder, rootFFile);
+        scanDirectory(dataStartFolder, rootFFile);
+
+        File colorsFile = new File(sdcardPath, "feuerwehr/config/colors.cfg");
+
+        colorMap = loadColors(colorsFile);
+    }
+
+    private ColorConfiguration loadColors(File file) {
+        ColorParser parser = new ColorParser();
+        return (ColorConfiguration) parser.parse(file);
     }
 
     public FFile getRootFFile() {
@@ -52,12 +66,12 @@ public class FileManager {
             return;
         }
         // CFG Handling
-        HashMap<String, CfgParser.ItemConfiguration> cfgs = new HashMap<>();
+        HashMap<String, ItemConfiguration> cfgs = new HashMap<>();
 
         for (File file : files) {
             if (file.getName().toUpperCase().endsWith(".CFG")) {
-                CfgParser parser = new CfgParser();
-                CfgParser.ItemConfiguration config = parser.parse(file);
+                ItemParser parser = new ItemParser();
+                ItemConfiguration config = (ItemConfiguration) parser.parse(file);
                 cfgs.put(file.getName().substring(0, file.getName().indexOf(".")), config);
             }
         }
@@ -82,7 +96,7 @@ public class FileManager {
                 }
                 newFFile.setDisplayName(name);
                 if (cfgs.containsKey(name)) {
-                    CfgParser.ItemConfiguration configuration = cfgs.get(name);
+                    ItemConfiguration configuration = cfgs.get(name);
                     newFFile.setButtonColor(configuration.buttonColor);
                     newFFile.setTextColor(configuration.textColor);
                     newFFile.setDisplayName(configuration.displayName != null ? configuration.displayName : newFFile

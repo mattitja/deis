@@ -6,13 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.util.Random;
 
 import de.feuerwehraumuehle.feuerwehrapp.R;
 import de.feuerwehraumuehle.feuerwehrapp.model.FFile;
@@ -49,7 +45,6 @@ public class FFileAdapter extends BaseAdapter {
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = inflater.inflate(R.layout.ffile_item, null);
-			view.setLayoutParams(new GridView.LayoutParams(GridView.AUTO_FIT, 600));
 		} else {
 			view = convertView;
 		}
@@ -58,18 +53,19 @@ public class FFileAdapter extends BaseAdapter {
 		ImageView type = (ImageView) view.findViewById(R.id.category_type);
 		ImageView icon = (ImageView) view.findViewById(R.id.icon);
 		FFile item = getItem(position);
-		name.setText(item.getName());
+		name.setText(item.getDisplayName());
 
-		int color = item.getColor() != null ? Color.parseColor(item.getColor()) : Color.argb(255, 255, 255, 255);
-		int textColor = item.getTextColor() != null ? Color.parseColor(item.getColor()) : Color.argb(255, 255, 255, 255);
-		container.setBackgroundColor(color);
+		int buttonColor = item.getButtonColor() != null ? Color.parseColor(item.getButtonColor()) : Color.parseColor
+				("gray");
+		int textColor = item.getTextColor() != null ? Color.parseColor(item.getTextColor()) : Color.argb(255, 255, 255, 255);
+		container.setBackgroundColor(buttonColor);
 		name.setTextColor(textColor);
 		type.setImageDrawable(mContext.getResources().getDrawable(item.getType() == FFileType.DIRECTORY ? R.mipmap
 				.ic_folder_black_48dp : R
 				.mipmap
 				.ic_picture_as_pdf_black_48dp));
-		if (item.getIconName() != null) {
-			int iconId = mContext.getResources().getIdentifier(item.getIconName(), "drawable",
+		if (item.getIcon() != null) {
+			int iconId = mContext.getResources().getIdentifier(item.getIcon(), "drawable",
 					mContext.getPackageName());
 			if (iconId != 0) {
 				icon.setImageDrawable(mContext.getDrawable(iconId));

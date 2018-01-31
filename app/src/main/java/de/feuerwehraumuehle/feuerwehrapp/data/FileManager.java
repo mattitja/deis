@@ -4,10 +4,7 @@ import android.content.Context;
 import android.os.Environment;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.HashMap;
-import java.util.List;
 
 import de.feuerwehraumuehle.feuerwehrapp.helper.CfgParser;
 import de.feuerwehraumuehle.feuerwehrapp.model.FFile;
@@ -30,11 +27,11 @@ public class FileManager {
 
     private FFile rootFFile;
 
-    private FileManager(Context context, String startFolderName) throws StartFolderNotFoundException,
+    private FileManager(Context context) throws StartFolderNotFoundException,
             StartFolderContainsNoItems {
         File externalStorageDirectory = Environment.getExternalStorageDirectory();
         String sdcardPath = externalStorageDirectory.getAbsolutePath();
-        File startFolder = new File(sdcardPath, startFolderName);
+        File startFolder = new File(sdcardPath, "feuerwehr/data");
         if (startFolder.isDirectory() && startFolder.listFiles().length == 0) {
             throw new StartFolderNotFoundException();
         } else if(startFolder.listFiles().length == 0) {
@@ -55,12 +52,12 @@ public class FileManager {
             return;
         }
         // CFG Handling
-        HashMap<String, CfgParser.Configuration> cfgs = new HashMap<>();
+        HashMap<String, CfgParser.ItemConfiguration> cfgs = new HashMap<>();
 
         for (File file : files) {
             if (file.getName().toUpperCase().endsWith(".CFG")) {
                 CfgParser parser = new CfgParser();
-                CfgParser.Configuration config = parser.parse(file);
+                CfgParser.ItemConfiguration config = parser.parse(file);
                 cfgs.put(file.getName().substring(0, file.getName().indexOf(".")), config);
             }
         }
@@ -83,14 +80,14 @@ public class FileManager {
                     int i = name.indexOf(".");
                     name = name.substring(0, i);
                 }
-                newFFile.setName(name);
+                newFFile.setDisplayName(name);
                 if (cfgs.containsKey(name)) {
-                    CfgParser.Configuration configuration = cfgs.get(name);
-                    newFFile.setColor(configuration.color);
+                    CfgParser.ItemConfiguration configuration = cfgs.get(name);
+                    newFFile.setButtonColor(configuration.buttonColor);
                     newFFile.setTextColor(configuration.textColor);
-                    newFFile.setName(configuration.alternativeName != null ? configuration.alternativeName : newFFile
-                            .getName());
-                    newFFile.setIconName(configuration.iconName);
+                    newFFile.setDisplayName(configuration.displayName != null ? configuration.displayName : newFFile
+                            .getDisplayName());
+                    newFFile.setIcon(configuration.icon);
                 }
                 if (newFFile.getType() != FFileType.UNDEFINED) {
                     currentFDirectory.addChildren(newFFile);

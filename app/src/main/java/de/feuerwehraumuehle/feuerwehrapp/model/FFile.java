@@ -13,7 +13,7 @@ public class FFile {
     private ArrayList<FFile> children;
     private String buttonColor;
     private String textColor;
-    private String iconName;
+    private String icon;
 
     public FFile() {
         children = new ArrayList<>();
@@ -67,11 +67,11 @@ public class FFile {
         this.textColor = textColor;
     }
 
-    public String getIconName() {
-        return iconName;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setIconName(String iconName) {
-        this.iconName = iconName;
+    public void setIcon(String iconName) {
+        this.icon = iconName;
     }
 }

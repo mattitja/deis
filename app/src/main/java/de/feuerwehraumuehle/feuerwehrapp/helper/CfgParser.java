@@ -18,60 +18,59 @@ public class CfgParser {
 
 	private static final String ns = null;
 
-	public Configuration parse(File in) {
+	public ItemConfiguration parse(File in) {
 		try {
 			InputStream stream = new FileInputStream(in);
-
 			XmlPullParser parser = Xml.newPullParser();
 			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-
 			parser.setInput(stream, null);
 			parser.nextTag();
 			return readConfiguration(parser);
-		} catch (Exception e) {
+		} catch (XmlPullParserException | IOException e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
 
-	public static class Configuration {
-		public final String color;
-		public final String alternativeName;
+	public static class ItemConfiguration {
+		public final String buttonColor;
+		public final String displayName;
         public final String textColor;
-        public final String iconName;
+        public final String icon;
 
-		private Configuration(String color, String alternativeName, String textColor, String iconName) {
-			this.color = color;
-			this.alternativeName = alternativeName;
+		private ItemConfiguration(String color, String displayName, String textColor, String icon) {
+			this.buttonColor = color;
+			this.displayName = displayName;
             this.textColor = textColor;
-            this.iconName = iconName;
+            this.icon = icon;
 		}
 	}
 
-	private Configuration readConfiguration(XmlPullParser parser) throws XmlPullParserException, IOException {
-		parser.require(XmlPullParser.START_TAG, ns, "configuration");
-		String color = null;
-		String alternativeName = null;
+	private ItemConfiguration readConfiguration(XmlPullParser parser) throws XmlPullParserException, IOException {
+		parser.require(XmlPullParser.START_TAG, ns, "item");
+		String buttonColor = null;
+		String displayName = null;
         String textColor = null;
-        String iconName = null;
+        String icon = null;
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
 			String name = parser.getName();
-			if (name.equals("color")) {
-				color = readAttribute(parser, "color");
-			} else if (name.equals("alternativeName")) {
-				alternativeName = readAttribute(parser, "alternativeName");
+			if (name.equals("buttonColor")) {
+				buttonColor = readAttribute(parser, "buttonColor");
+			} else if (name.equals("displayName")) {
+				displayName = readAttribute(parser, "displayName");
 			} else if (name.equals("textColor")) {
-                alternativeName = readAttribute(parser, "textColor");
+                textColor = readAttribute(parser, "textColor");
             } else if (name.equals("icon")) {
-				iconName = readAttribute(parser, "icon");
+				icon = readAttribute(parser, "icon");
 			} else {
 				skip(parser);
 
 			}
 		}
-		return new Configuration(color, alternativeName, textColor, iconName);
+		return new ItemConfiguration(buttonColor, displayName, textColor, icon);
 	}
 
 	private String readAttribute(XmlPullParser parser, String tag) throws IOException, XmlPullParserException {

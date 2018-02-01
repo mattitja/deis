@@ -12,8 +12,8 @@ public class Item {
     private String absolutePath;
     private ItemType type;
     private ArrayList<Item> children;
-    private String buttonColor;
-    private String textColor;
+    private int buttonColor;
+    private int textColor;
     private String icon;
 
     public Item() {
@@ -52,19 +52,19 @@ public class Item {
         this.type = type;
     }
 
-    public void setButtonColor(String buttonColor) {
+    public void setButtonColor(int buttonColor) {
         this.buttonColor = buttonColor;
     }
 
-    public String getButtonColor() {
+    public int getButtonColor() {
         return buttonColor;
     }
 
-    public String getTextColor() {
+    public int getTextColor() {
         return textColor;
     }
 
-    public void setTextColor(String textColor) {
+    public void setTextColor(int textColor) {
         this.textColor = textColor;
     }
 

@@ -6,13 +6,13 @@ package de.feuerwehraumuehle.feuerwehrapp.config;
 
 public class ItemConfiguration extends Configuration {
 
-	public final String buttonColor;
+	public final int buttonColor;
 	public final String displayName;
-	public final String textColor;
+	public final int textColor;
 	public final String icon;
 
-	public ItemConfiguration(String color, String displayName, String textColor, String icon) {
-		this.buttonColor = color;
+	public ItemConfiguration(int buttonColor, String displayName, int textColor, String icon) {
+		this.buttonColor = buttonColor;
 		this.displayName = displayName;
 		this.textColor = textColor;
 		this.icon = icon;

@@ -60,19 +60,8 @@ public class MenuItemAdapter extends BaseAdapter {
 		Item item = getItem(position);
 		name.setText(item.getDisplayName());
 
-		int buttonColor = Color.parseColor("gray");
-		if (item.getButtonColor() != null) {
-			String colorByName = FeuerwehrApp.colorMap.getColorByName(item.getButtonColor());
-			if (colorByName != null) {
-				buttonColor = Color.parseColor(colorByName);
-			} else {
-				buttonColor = Color.parseColor(item.getButtonColor());
-			}
-		}
-
-		int textColor = item.getTextColor() != null ? Color.parseColor(item.getTextColor()) : Color.argb(255, 255, 255, 255);
-		container.setBackgroundColor(buttonColor);
-		name.setTextColor(textColor);
+		container.setBackgroundColor(item.getButtonColor());
+		name.setTextColor(item.getTextColor());
 		type.setImageDrawable(mContext.getResources().getDrawable(item.getType() == ItemType.DIRECTORY ? R.mipmap
 				.ic_folder_black_48dp : R
 				.mipmap

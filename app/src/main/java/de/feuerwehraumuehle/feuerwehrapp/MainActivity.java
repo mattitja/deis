@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import org.androidannotations.annotations.App;
+
 import java.util.ArrayList;
 
 import de.feuerwehraumuehle.feuerwehrapp.adapter.MenuItemAdapter;
@@ -65,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
         GridView gridView = (GridView) findViewById(R.id.gridview);
         gridView.setAdapter(adapter);
+        View view = findViewById(R.id.background);
+        view.setBackgroundColor(FeuerwehrApp.globalDefaults.defaultBackgroundColor);
 
         final ArrayList<Integer> posClone = new ArrayList<>(pos);
         final Item finalCurrentFile = currentFile;

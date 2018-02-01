@@ -27,14 +27,14 @@ public abstract class AbstractConfigurationParser {
 			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
 			parser.setInput(stream, null);
 			parser.nextTag();
-			return parse(parser);
+			return map(parser);
 		} catch (XmlPullParserException | IOException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
-	abstract Configuration parse(XmlPullParser parser) throws XmlPullParserException, IOException;
+	protected abstract Configuration map(XmlPullParser parser) throws XmlPullParserException, IOException;
 
 	String readAttribute(XmlPullParser parser, String tag) throws IOException, XmlPullParserException {
 		parser.require(XmlPullParser.START_TAG, ns, tag);

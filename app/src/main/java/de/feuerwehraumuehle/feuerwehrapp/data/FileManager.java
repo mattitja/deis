@@ -88,6 +88,10 @@ public class FileManager {
                     newItem.setDisplayName(configuration.displayName != null ? configuration.displayName : newItem
                             .getDisplayName());
                     newItem.setIcon(configuration.icon);
+                } else {
+                    newItem.setButtonColor(FeuerwehrApp.globalDefaults.defaultButtonColor);
+                    newItem.setTextColor(FeuerwehrApp.globalDefaults.defaultTextColor);
+                    newItem.setIcon(FeuerwehrApp.globalDefaults.defaultIcon);
                 }
                 if (newItem.getType() != ItemType.UNDEFINED) {
                     currentFDirectory.addChildren(newItem);

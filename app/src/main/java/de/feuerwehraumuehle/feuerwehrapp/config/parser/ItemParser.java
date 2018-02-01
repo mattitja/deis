@@ -3,8 +3,11 @@ package de.feuerwehraumuehle.feuerwehrapp.config.parser;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.File;
 import java.io.IOException;
 
+import de.feuerwehraumuehle.feuerwehrapp.FeuerwehrApp;
+import de.feuerwehraumuehle.feuerwehrapp.config.ColorMap;
 import de.feuerwehraumuehle.feuerwehrapp.config.Configuration;
 import de.feuerwehraumuehle.feuerwehrapp.config.ItemConfiguration;
 
@@ -14,11 +17,16 @@ import de.feuerwehraumuehle.feuerwehrapp.config.ItemConfiguration;
 
 public class ItemParser extends AbstractConfigurationParser {
 
-	Configuration parse(XmlPullParser parser) throws XmlPullParserException, IOException {
+	@Override
+	public ItemConfiguration parse(File file) {
+		return (ItemConfiguration) super.parse(file);
+	}
+
+	protected Configuration map(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, ns, "item");
-		String buttonColor = null;
+		int buttonColor = 0;
 		String displayName = null;
-		String textColor = null;
+		int textColor = 0;
 		String icon = null;
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -26,11 +34,13 @@ public class ItemParser extends AbstractConfigurationParser {
 			}
 			String name = parser.getName();
 			if (name.equals("buttonColor")) {
-				buttonColor = readAttribute(parser, "buttonColor");
+				buttonColor = FeuerwehrApp.getColorByColorSomething(readAttribute(parser, "buttonColor"),
+						FeuerwehrApp.globalDefaults.defaultButtonColor);
 			} else if (name.equals("displayName")) {
 				displayName = readAttribute(parser, "displayName");
 			} else if (name.equals("textColor")) {
-				textColor = readAttribute(parser, "textColor");
+				textColor = FeuerwehrApp.getColorByColorSomething(readAttribute(parser, "textColor"),
+						FeuerwehrApp.globalDefaults.defaultTextColor);
 			} else if (name.equals("icon")) {
 				icon = readAttribute(parser, "icon");
 			} else {

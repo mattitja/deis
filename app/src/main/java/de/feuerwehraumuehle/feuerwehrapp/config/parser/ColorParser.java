@@ -3,6 +3,7 @@ package de.feuerwehraumuehle.feuerwehrapp.config.parser;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.File;
 import java.io.IOException;
 
 import de.feuerwehraumuehle.feuerwehrapp.config.ColorMap;
@@ -15,7 +16,11 @@ import de.feuerwehraumuehle.feuerwehrapp.config.Configuration;
 public class ColorParser extends AbstractConfigurationParser {
 
 	@Override
-	Configuration parse(XmlPullParser parser) throws XmlPullParserException, IOException {
+	public ColorMap parse(File file) {
+		return (ColorMap) super.parse(file);
+	}
+
+	protected Configuration map(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, ns, "colors");
 		ColorMap colorMap = new ColorMap();
 		while (parser.next() != XmlPullParser.END_TAG) {

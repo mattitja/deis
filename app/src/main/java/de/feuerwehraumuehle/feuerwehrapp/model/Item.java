@@ -1,37 +1,78 @@
 package de.feuerwehraumuehle.feuerwehrapp.model;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
- * Created by Matze on 18.02.2017.
+ * Created by Matze on 19.02.2017.
  */
 
-public class Item implements Serializable {
-    private String name;
-    private String fullPath;
-    private FFileType type;
+public class Item {
 
-    public String getName() {
-        return name;
+    private String displayName;
+    private String absolutePath;
+    private ItemType type;
+    private ArrayList<Item> children;
+    private String buttonColor;
+    private String textColor;
+    private String icon;
+
+    public Item() {
+        children = new ArrayList<>();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public String getFullPath() {
-        return fullPath;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
-    public void setFullPath(String fullPath) {
-        this.fullPath = fullPath;
+    public String getAbsolutePath() {
+        return absolutePath;
     }
 
-    public FFileType getType() {
+    public void setAbsolutePath(String absolutePath) {
+        this.absolutePath = absolutePath;
+    }
+
+    public ArrayList<Item> getChildren() {
+        return children;
+    }
+
+    public void addChildren(Item child) {
+        children.add(child);
+    }
+
+    public ItemType getType() {
         return type;
     }
 
-    public void setType(FFileType type) {
+    public void setType(ItemType type) {
         this.type = type;
+    }
+
+    public void setButtonColor(String buttonColor) {
+        this.buttonColor = buttonColor;
+    }
+
+    public String getButtonColor() {
+        return buttonColor;
+    }
+
+    public String getTextColor() {
+        return textColor;
+    }
+
+    public void setTextColor(String textColor) {
+        this.textColor = textColor;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String iconName) {
+        this.icon = iconName;
     }
 }

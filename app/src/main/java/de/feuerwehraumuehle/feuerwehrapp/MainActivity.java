@@ -5,19 +5,17 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import de.feuerwehraumuehle.feuerwehrapp.adapter.FFileAdapter;
+import de.feuerwehraumuehle.feuerwehrapp.adapter.MenuItemAdapter;
 import de.feuerwehraumuehle.feuerwehrapp.data.FileManager;
 import de.feuerwehraumuehle.feuerwehrapp.helper.Utils;
-import de.feuerwehraumuehle.feuerwehrapp.model.FFile;
-import de.feuerwehraumuehle.feuerwehrapp.model.FFileType;
+import de.feuerwehraumuehle.feuerwehrapp.model.Item;
+import de.feuerwehraumuehle.feuerwehrapp.model.ItemType;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
             pos = new ArrayList<>();
         }
 
-        FFile currentFile = null;
+        Item currentFile = null;
         try {
-            currentFile = FileManager.getInstance(this).getRootFFile();
+            currentFile = FileManager.getInstance(this).getRootItem();
         } catch (Exception e) {
             e.printStackTrace();
             Intent intent = new Intent(this, EmptyActivity.class);
@@ -63,19 +61,19 @@ public class MainActivity extends AppCompatActivity {
             currentFile = currentFile.getChildren().get(p);
         }
 
-        FFileAdapter adapter = new FFileAdapter(this, currentFile);
+        MenuItemAdapter adapter = new MenuItemAdapter(this, currentFile);
 
         GridView gridView = (GridView) findViewById(R.id.gridview);
         gridView.setAdapter(adapter);
 
         final ArrayList<Integer> posClone = new ArrayList<>(pos);
-        final FFile finalCurrentFile = currentFile;
+        final Item finalCurrentFile = currentFile;
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                FFile fFile = finalCurrentFile.getChildren().get(position);
-                if (fFile.getType() == FFileType.DIRECTORY) {
+                Item item = finalCurrentFile.getChildren().get(position);
+                if (item.getType() == ItemType.DIRECTORY) {
                     Bundle bundle = new Bundle();
                     posClone.add(position);
                     bundle.putIntegerArrayList("pos", posClone);
@@ -83,12 +81,12 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     startActivity(intent);
                     posClone.clear();
-                } else if (fFile.getType() == FFileType.PDF) {
+                } else if (item.getType() == ItemType.PDF) {
                     Intent intent = new Intent(MainActivity.this, PDFnewActivity_.class);
-                    intent.putExtra("pdf_path", fFile.getAbsolutePath());
+                    intent.putExtra("pdf_path", item.getAbsolutePath());
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getApplicationContext(), fFile.getType().toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), item.getType().toString(), Toast.LENGTH_SHORT).show();
                 }
 
             }

@@ -1,4 +1,4 @@
-package de.feuerwehraumuehle.feuerwehrapp.helper;
+package de.feuerwehraumuehle.feuerwehrapp.config;
 
 import java.util.HashMap;
 
@@ -6,9 +6,9 @@ import java.util.HashMap;
  * Created by mmi on 31.01.2018.
  */
 
-public class ColorConfiguration extends Configuration {
+public class ColorMap extends Configuration {
 
-	public ColorConfiguration() {
+	public ColorMap() {
 		colorMap = new HashMap<>();
 	}
 

@@ -1,28 +1,33 @@
 package de.feuerwehraumuehle.feuerwehrapp.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
+
+import de.feuerwehraumuehle.feuerwehrapp.FeuerwehrApp;
 import de.feuerwehraumuehle.feuerwehrapp.R;
-import de.feuerwehraumuehle.feuerwehrapp.model.FFile;
-import de.feuerwehraumuehle.feuerwehrapp.model.FFileType;
+import de.feuerwehraumuehle.feuerwehrapp.model.Item;
+import de.feuerwehraumuehle.feuerwehrapp.model.ItemType;
 
 /**
  * Created by Matze on 18.02.2017.
  */
 
-public class FFileAdapter extends BaseAdapter {
-	private Context mContext;
-	private FFile FDirectory;
+public class MenuItemAdapter extends BaseAdapter {
 
-	public FFileAdapter(Context c, FFile FDirectory) {
+	private Context mContext;
+	private Item FDirectory;
+
+	public MenuItemAdapter(Context c, Item FDirectory) {
 		mContext = c;
 		this.FDirectory = FDirectory;
 	}
@@ -31,7 +36,7 @@ public class FFileAdapter extends BaseAdapter {
 		return FDirectory.getChildren().size();
 	}
 
-	public FFile getItem(int position) {
+	public Item getItem(int position) {
 		return FDirectory.getChildren().get(position);
 	}
 
@@ -52,23 +57,40 @@ public class FFileAdapter extends BaseAdapter {
 		View container = view.findViewById(R.id.category_container);
 		ImageView type = (ImageView) view.findViewById(R.id.category_type);
 		ImageView icon = (ImageView) view.findViewById(R.id.icon);
-		FFile item = getItem(position);
+		Item item = getItem(position);
 		name.setText(item.getDisplayName());
 
-		int buttonColor = item.getButtonColor() != null ? Color.parseColor(item.getButtonColor()) : Color.parseColor
-				("gray");
+		int buttonColor = Color.parseColor("gray");
+		if (item.getButtonColor() != null) {
+			String colorByName = FeuerwehrApp.colorMap.getColorByName(item.getButtonColor());
+			if (colorByName != null) {
+				buttonColor = Color.parseColor(colorByName);
+			} else {
+				buttonColor = Color.parseColor(item.getButtonColor());
+			}
+		}
+
 		int textColor = item.getTextColor() != null ? Color.parseColor(item.getTextColor()) : Color.argb(255, 255, 255, 255);
 		container.setBackgroundColor(buttonColor);
 		name.setTextColor(textColor);
-		type.setImageDrawable(mContext.getResources().getDrawable(item.getType() == FFileType.DIRECTORY ? R.mipmap
+		type.setImageDrawable(mContext.getResources().getDrawable(item.getType() == ItemType.DIRECTORY ? R.mipmap
 				.ic_folder_black_48dp : R
 				.mipmap
 				.ic_picture_as_pdf_black_48dp));
+
+
 		if (item.getIcon() != null) {
-			int iconId = mContext.getResources().getIdentifier(item.getIcon(), "drawable",
-					mContext.getPackageName());
-			if (iconId != 0) {
-				icon.setImageDrawable(mContext.getDrawable(iconId));
+			File imgFile = new  File("/sdcard/feuerwehr/config/icons/" + item.getIcon() + ".png");
+			if(imgFile.exists()){
+				Bitmap loadedIcon = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+				icon.setImageBitmap(loadedIcon);
+
+			} else {
+				int iconId = mContext.getResources().getIdentifier(item.getIcon(), "drawable",
+						mContext.getPackageName());
+				if (iconId != 0) {
+					icon.setImageDrawable(mContext.getDrawable(iconId));
+				}
 			}
 		} else {
 			icon.setImageDrawable(null);

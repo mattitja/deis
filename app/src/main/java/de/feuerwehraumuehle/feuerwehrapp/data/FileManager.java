@@ -1,17 +1,15 @@
 package de.feuerwehraumuehle.feuerwehrapp.data;
 
 import android.content.Context;
-import android.os.Environment;
 
 import java.io.File;
 import java.util.HashMap;
 
-import de.feuerwehraumuehle.feuerwehrapp.helper.ColorConfiguration;
-import de.feuerwehraumuehle.feuerwehrapp.helper.ColorParser;
-import de.feuerwehraumuehle.feuerwehrapp.helper.ItemConfiguration;
-import de.feuerwehraumuehle.feuerwehrapp.helper.ItemParser;
-import de.feuerwehraumuehle.feuerwehrapp.model.FFile;
-import de.feuerwehraumuehle.feuerwehrapp.model.FFileType;
+import de.feuerwehraumuehle.feuerwehrapp.FeuerwehrApp;
+import de.feuerwehraumuehle.feuerwehrapp.config.ItemConfiguration;
+import de.feuerwehraumuehle.feuerwehrapp.config.parser.ItemParser;
+import de.feuerwehraumuehle.feuerwehrapp.model.Item;
+import de.feuerwehraumuehle.feuerwehrapp.model.ItemType;
 
 /**
  * Created by Matze on 19.02.2017.
@@ -28,39 +26,27 @@ public class FileManager {
         return instance;
     }
 
-    public static ColorConfiguration colorMap;
-
-    private FFile rootFFile;
+    private Item rootItem;
 
     private FileManager(Context context) throws StartFolderNotFoundException,
             StartFolderContainsNoItems {
-        File externalStorageDirectory = Environment.getExternalStorageDirectory();
-        String sdcardPath = externalStorageDirectory.getAbsolutePath();
+        String sdcardPath = FeuerwehrApp.getSDCardPath();
         File dataStartFolder = new File(sdcardPath, "feuerwehr/data");
         if (dataStartFolder.isDirectory() && dataStartFolder.listFiles().length == 0) {
             throw new StartFolderNotFoundException();
         } else if(dataStartFolder.listFiles().length == 0) {
             throw new StartFolderContainsNoItems();
         }
-        rootFFile = new FFile();
+        rootItem = new Item();
 
-        scanDirectory(dataStartFolder, rootFFile);
-
-        File colorsFile = new File(sdcardPath, "feuerwehr/config/colors.cfg");
-
-        colorMap = loadColors(colorsFile);
+        scanDirectory(dataStartFolder, rootItem);
     }
 
-    private ColorConfiguration loadColors(File file) {
-        ColorParser parser = new ColorParser();
-        return (ColorConfiguration) parser.parse(file);
+    public Item getRootItem() {
+        return rootItem;
     }
 
-    public FFile getRootFFile() {
-        return rootFFile;
-    }
-
-    private void scanDirectory(File directory, FFile currentFDirectory) {
+    private void scanDirectory(File directory, Item currentFDirectory) {
         File[] files = directory.listFiles();
         if (files == null) {
             return;
@@ -77,34 +63,34 @@ public class FileManager {
         }
         for (File file : files) {
             if (!file.getName().toUpperCase().endsWith(".CFG")) {
-                FFile newFFile = new FFile();
-                newFFile.setAbsolutePath(file.getAbsolutePath());
+                Item newItem = new Item();
+                newItem.setAbsolutePath(file.getAbsolutePath());
                 if (file.isDirectory()) {
-                    newFFile.setType(FFileType.DIRECTORY);
-                    scanDirectory(file, newFFile);
+                    newItem.setType(ItemType.DIRECTORY);
+                    scanDirectory(file, newItem);
                 } else if (file.getName().toUpperCase().endsWith(".PDF")) {
-                    newFFile.setType(FFileType.PDF);
+                    newItem.setType(ItemType.PDF);
                 } else if (file.getName().toUpperCase().endsWith(".JPG")) {
-                    newFFile.setType(FFileType.IMAGE);
+                    newItem.setType(ItemType.IMAGE);
                 } else {
-                    newFFile.setType(FFileType.UNDEFINED);
+                    newItem.setType(ItemType.UNDEFINED);
                 }
                 String name = file.getName();
                 if (name.contains(".")) {
                     int i = name.indexOf(".");
                     name = name.substring(0, i);
                 }
-                newFFile.setDisplayName(name);
+                newItem.setDisplayName(name);
                 if (cfgs.containsKey(name)) {
                     ItemConfiguration configuration = cfgs.get(name);
-                    newFFile.setButtonColor(configuration.buttonColor);
-                    newFFile.setTextColor(configuration.textColor);
-                    newFFile.setDisplayName(configuration.displayName != null ? configuration.displayName : newFFile
+                    newItem.setButtonColor(configuration.buttonColor);
+                    newItem.setTextColor(configuration.textColor);
+                    newItem.setDisplayName(configuration.displayName != null ? configuration.displayName : newItem
                             .getDisplayName());
-                    newFFile.setIcon(configuration.icon);
+                    newItem.setIcon(configuration.icon);
                 }
-                if (newFFile.getType() != FFileType.UNDEFINED) {
-                    currentFDirectory.addChildren(newFFile);
+                if (newItem.getType() != ItemType.UNDEFINED) {
+                    currentFDirectory.addChildren(newItem);
                 }
             }
         }

@@ -1,9 +1,12 @@
-package de.feuerwehraumuehle.feuerwehrapp.helper;
+package de.feuerwehraumuehle.feuerwehrapp.config.parser;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+
+import de.feuerwehraumuehle.feuerwehrapp.config.Configuration;
+import de.feuerwehraumuehle.feuerwehrapp.config.ItemConfiguration;
 
 /**
  * Created by mmi on 31.01.2018.
@@ -11,7 +14,7 @@ import java.io.IOException;
 
 public class ItemParser extends AbstractConfigurationParser {
 
-	Configuration readConfiguration(XmlPullParser parser) throws XmlPullParserException, IOException {
+	Configuration parse(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, ns, "item");
 		String buttonColor = null;
 		String displayName = null;

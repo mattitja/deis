@@ -1,4 +1,4 @@
-package de.feuerwehraumuehle.feuerwehrapp.helper;
+package de.feuerwehraumuehle.feuerwehrapp.config.parser;
 
 import android.util.Xml;
 
@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+import de.feuerwehraumuehle.feuerwehrapp.config.Configuration;
 
 /**
  * Created by Matze on 19.02.2017.
@@ -25,14 +27,14 @@ public abstract class AbstractConfigurationParser {
 			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
 			parser.setInput(stream, null);
 			parser.nextTag();
-			return readConfiguration(parser);
+			return parse(parser);
 		} catch (XmlPullParserException | IOException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
-	abstract Configuration readConfiguration(XmlPullParser parser) throws XmlPullParserException, IOException;
+	abstract Configuration parse(XmlPullParser parser) throws XmlPullParserException, IOException;
 
 	String readAttribute(XmlPullParser parser, String tag) throws IOException, XmlPullParserException {
 		parser.require(XmlPullParser.START_TAG, ns, tag);

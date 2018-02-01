@@ -45,20 +45,16 @@ public class FeuerwehrApp extends Application {
 
 	public static int getColorByColorSomething(String colorName) {
 		int buttonColor = 0;
-		String colorValue = colorMap.getColorByName(colorName);
-		if (colorValue != null) {
-			buttonColor = Color.parseColor(colorValue);
-		} else {
-			buttonColor = Color.parseColor(colorName);
+		try {
+			String colorValue = colorMap.getColorByName(colorName);
+			if (colorValue != null) {
+				buttonColor = Color.parseColor(colorValue);
+			} else {
+				buttonColor = Color.parseColor(colorName);
+			}
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
 		}
 		return buttonColor;
-	}
-
-	public static int getColorByColorSomething(String colorSomething, int defaultColor) {
-		int color = getColorByColorSomething(colorSomething);
-		if (color == 0) {
-			color = defaultColor;
-		}
-		return color;
 	}
 }

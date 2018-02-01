@@ -34,13 +34,11 @@ public class ItemParser extends AbstractConfigurationParser {
 			}
 			String name = parser.getName();
 			if (name.equals("buttonColor")) {
-				buttonColor = FeuerwehrApp.getColorByColorSomething(readAttribute(parser, "buttonColor"),
-						FeuerwehrApp.globalDefaults.defaultButtonColor);
+				buttonColor = FeuerwehrApp.getColorByColorSomething(readAttribute(parser, "buttonColor"));
 			} else if (name.equals("displayName")) {
 				displayName = readAttribute(parser, "displayName");
 			} else if (name.equals("textColor")) {
-				textColor = FeuerwehrApp.getColorByColorSomething(readAttribute(parser, "textColor"),
-						FeuerwehrApp.globalDefaults.defaultTextColor);
+				textColor = FeuerwehrApp.getColorByColorSomething(readAttribute(parser, "textColor"));
 			} else if (name.equals("icon")) {
 				icon = readAttribute(parser, "icon");
 			} else {
@@ -48,6 +46,13 @@ public class ItemParser extends AbstractConfigurationParser {
 
 			}
 		}
+		if (buttonColor == 0) {
+			buttonColor = FeuerwehrApp.globalDefaults.defaultButtonColor;
+		}
+		if (textColor == 0) {
+			textColor = FeuerwehrApp.globalDefaults.defaultTextColor;
+		}
+
 		return new ItemConfiguration(buttonColor, displayName, textColor, icon);
 	}
 }

@@ -3,7 +3,6 @@ package de.feuerwehraumuehle.feuerwehrapp.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,30 +61,35 @@ public class MenuItemAdapter extends BaseAdapter {
 
 		container.setBackgroundColor(item.getButtonColor());
 		name.setTextColor(item.getTextColor());
-		type.setImageDrawable(mContext.getResources().getDrawable(item.getType() == ItemType.DIRECTORY ? R.mipmap
-				.ic_folder_black_48dp : R
-				.mipmap
-				.ic_picture_as_pdf_black_48dp));
 
+		loadFolderImage(type, item);
 
-		if (item.getIcon() != null) {
-			File imgFile = new  File("/sdcard/feuerwehr/config/icons/" + item.getIcon() + ".png");
-			if(imgFile.exists()){
-				Bitmap loadedIcon = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-				icon.setImageBitmap(loadedIcon);
-
-			} else {
-				int iconId = mContext.getResources().getIdentifier(item.getIcon(), "drawable",
-						mContext.getPackageName());
-				if (iconId != 0) {
-					icon.setImageDrawable(mContext.getDrawable(iconId));
-				}
-			}
-		} else {
-			icon.setImageDrawable(null);
-		}
-
+		loadImage(item.getIcon(), FeuerwehrApp.globalDefaults.defaultIcon, icon);
 
 		return view;
+	}
+
+	private void loadFolderImage(ImageView type, Item item) {
+		if (item.getType() == ItemType.DIRECTORY) {
+			loadImage("icon_folder", "icon_folder", type);
+		} else if (item.getType() == ItemType.PDF) {
+			loadImage("icon_pdf", "icon_pdf", type);
+		}
+	}
+
+	private void loadImage(String iconName, String defaultIconName, ImageView view) {
+		File imgFile = new  File("/sdcard/feuerwehr/config/icons/" + iconName + ".png");
+		if(imgFile.exists()){
+			Bitmap loadedIcon = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+			view.setImageBitmap(loadedIcon);
+		} else {
+			imgFile = new  File("/sdcard/feuerwehr/config/icons/" + defaultIconName + ".png");
+			if(imgFile.exists()){
+				Bitmap loadedIcon = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+				view.setImageBitmap(loadedIcon);
+			} else {
+				view.setImageDrawable(null);
+			}
+		}
 	}
 }

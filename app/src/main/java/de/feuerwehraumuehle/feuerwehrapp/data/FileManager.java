@@ -58,7 +58,9 @@ public class FileManager {
             if (file.getName().toUpperCase().endsWith(".CFG")) {
                 ItemParser parser = new ItemParser();
                 ItemConfiguration config = (ItemConfiguration) parser.parse(file);
-                cfgs.put(file.getName().substring(0, file.getName().indexOf(".")), config);
+                if (config != null) {
+                    cfgs.put(file.getName().substring(0, file.getName().indexOf(".")), config);
+                }
             }
         }
         for (File file : files) {

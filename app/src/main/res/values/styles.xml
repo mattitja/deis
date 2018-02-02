@@ -12,6 +12,7 @@
         <item name="windowActionBar">true</item>
         <item name="windowNoTitle">false</item>
         <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowDisablePreview">true</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

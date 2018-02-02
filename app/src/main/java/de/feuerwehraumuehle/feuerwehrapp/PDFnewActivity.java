@@ -5,13 +5,17 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
@@ -34,7 +38,7 @@ import de.feuerwehraumuehle.feuerwehrapp.helper.Utils;
 import de.feuerwehraumuehle.feuerwehrapp.view.CustomScrollHandle;
 
 @EActivity(R.layout.activity_pdfnew)
-@OptionsMenu(R.menu.options)
+@OptionsMenu(R.menu.menu)
 public class PDFnewActivity extends AppCompatActivity implements OnPageChangeListener, OnLoadCompleteListener {
 
 	private static final String TAG = PDFnewActivity.class.getSimpleName();
@@ -48,10 +52,18 @@ public class PDFnewActivity extends AppCompatActivity implements OnPageChangeLis
 	String pdfPath;
 
 	@Override
+	protected void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(FeuerwehrApp.globalDefaults.defaultMenuBackgroundColor));
+	}
+
+	@Override
 	protected void onResume() {
 		super.onResume();
 		Utils.setStatusBarColor(this);
 		pdfPath = getIntent().getStringExtra("pdf_path");
+		displayName = getIntent().getStringExtra("displayName");
 		Uri uri = Uri.fromFile(new File(pdfPath));
 		displayFromUri(uri);
 	}
@@ -67,23 +79,7 @@ public class PDFnewActivity extends AppCompatActivity implements OnPageChangeLis
 
 	String pdfFileName;
 
-	@OptionsItem(R.id.pickFile)
-	void pickFile() {
-		int permissionCheck = ContextCompat.checkSelfPermission(this,
-				READ_EXTERNAL_STORAGE);
-
-		if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-			ActivityCompat.requestPermissions(
-					this,
-					new String[]{READ_EXTERNAL_STORAGE},
-					PERMISSION_CODE
-			);
-
-			return;
-		}
-
-		launchPicker();
-	}
+	String displayName;
 
 	void launchPicker() {
 		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -104,7 +100,7 @@ public class PDFnewActivity extends AppCompatActivity implements OnPageChangeLis
 		} else {
 			displayFromAsset(pdfFileName);
 		}
-		setTitle(pdfFileName);
+		setTitle(displayName);
 	}
 
 	CustomScrollHandle customScrollHandle;
@@ -162,7 +158,11 @@ public class PDFnewActivity extends AppCompatActivity implements OnPageChangeLis
 	@Override
 	public void onPageChanged(int page, int pageCount) {
 		pageNumber = page;
-		setTitle(String.format("%s %s / %s", pdfFileName, page + 1, pageCount));
+		if (pageCount == 1) {
+			setTitle(displayName);
+		} else {
+			setTitle(String.format("%s (Seite %s von %s)", displayName, page + 1, pageCount));
+		}
 	}
 
 	public String getFileName(Uri uri) {
@@ -228,6 +228,21 @@ public class PDFnewActivity extends AppCompatActivity implements OnPageChangeLis
 				launchPicker();
 			}
 		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
+			finish();
+			return true;
+		} else if (item.getItemId() == R.id.root) {
+			Intent intent = new Intent(PDFnewActivity.this, MainActivity.class);
+
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+			startActivity(intent);
+		}
+		return false;
 	}
 
 }

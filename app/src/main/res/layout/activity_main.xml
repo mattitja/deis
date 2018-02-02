@@ -12,10 +12,10 @@
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_margin="0dp"
         android:gravity="center"
-        android:horizontalSpacing="2dp"
+        android:horizontalSpacing="0dp"
         android:numColumns="3"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="2dp" />
+        android:verticalSpacing="0dp" />
 </FrameLayout>

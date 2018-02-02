@@ -10,14 +10,16 @@ public class GlobalDefaults extends Configuration {
 	public final int defaultTextColor;
 	public final String defaultIcon;
 	public final int defaultBackgroundColor;
+	public final int defaultMenuBackgroundColor;
 	public final boolean randomizeAllButtonColors;
 
 	public GlobalDefaults(int defaultButtonColor, int defaultTextColor, String defaultIcon, int
-			defaultBackgroundColor, boolean randomizeAllButtonColors) {
+			defaultBackgroundColor, int defaultMenuBackgroundColor, boolean randomizeAllButtonColors) {
 		this.defaultButtonColor = defaultButtonColor;
 		this.defaultTextColor = defaultTextColor;
 		this.defaultIcon = defaultIcon;
 		this.defaultBackgroundColor = defaultBackgroundColor;
+		this.defaultMenuBackgroundColor = defaultMenuBackgroundColor;
 		this.randomizeAllButtonColors = randomizeAllButtonColors;
 	}
 }

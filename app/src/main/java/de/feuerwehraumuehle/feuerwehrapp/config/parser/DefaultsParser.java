@@ -23,10 +23,11 @@ public class DefaultsParser extends AbstractConfigurationParser {
 
 	protected Configuration map(XmlPullParser parser) throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, ns, "defaults");
-		int defaultButtonColor = -1;
-		int defaultTextColor = -1;
+		int defaultButtonColor = 0;
+		int defaultTextColor = 0;
 		String defaultIcon = null;
-		int defaultBackgroundColor = -1;
+		int defaultBackgroundColor = 0;
+		int defaultMenuBackgroundColor = 0;
 		boolean randomizeAllButtonColors = false;
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -41,6 +42,8 @@ public class DefaultsParser extends AbstractConfigurationParser {
 				defaultTextColor = FeuerwehrApp.getColorByColorSomething(readAttribute(parser, "textColor"));
 			} else if (name.equals("icon")) {
 				defaultIcon = readAttribute(parser, "icon");
+			} else if (name.equals("menuBackgroundColor")) {
+				defaultMenuBackgroundColor = FeuerwehrApp.getColorByColorSomething(readAttribute(parser, "menuBackgroundColor"));
 			} else if (name.equals("randomizeAllButtonColors")) {
 				String bool = readAttribute(parser, "randomizeAllButtonColors");
 				randomizeAllButtonColors = "true".equalsIgnoreCase(bool);
@@ -52,8 +55,9 @@ public class DefaultsParser extends AbstractConfigurationParser {
 		checkIfDefaultIsSet(defaultBackgroundColor);
 		checkIfDefaultIsSet(defaultButtonColor);
 		checkIfDefaultIsSet(defaultTextColor);
+		checkIfDefaultIsSet(defaultMenuBackgroundColor);
 
-		return new GlobalDefaults(defaultButtonColor, defaultTextColor, defaultIcon, defaultBackgroundColor, randomizeAllButtonColors);
+		return new GlobalDefaults(defaultButtonColor, defaultTextColor, defaultIcon, defaultBackgroundColor, defaultMenuBackgroundColor, randomizeAllButtonColors);
 	}
 
 	private void checkIfDefaultIsSet(int color) {

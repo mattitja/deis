@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/pickFile"
-        android:icon="@drawable/ic_open_in_browser_grey_700_48dp"
-        android:title="@string/pick_file"
+        android:id="@+id/root"
+        android:icon="@drawable/ic_home_white_48dp"
+        android:title="Hauptmenü"
         app:showAsAction="always" />
 </menu>

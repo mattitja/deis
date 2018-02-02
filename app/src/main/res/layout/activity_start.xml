@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context="de.feuerwehraumuehle.feuerwehrapp.StartActivity">
+
+    <TextView
+        android:id="@+id/empty_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="kein Startscreen in config-Ordner hinterlegt"
+        android:textColor="@android:color/white"
+        android:textSize="50sp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/start_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</FrameLayout>

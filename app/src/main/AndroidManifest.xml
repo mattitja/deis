@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="de.feuerwehraumuehle.feuerwehrapp"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="de.feuerwehraumuehle.feuerwehrapp">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".FeuerwehrApp"
@@ -14,22 +14,23 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.ActionBar"/>
         <activity
             android:name=".PDFActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".EmptyActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".PDFnewActivity_"
-                  android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.ActionBar" />
+        <activity
+            android:name=".PDFnewActivity_"
+            android:theme="@style/AppTheme.ActionBar" />
+        <activity
+            android:name=".StartActivity"
+            android:theme="@style/AppTheme.StartScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

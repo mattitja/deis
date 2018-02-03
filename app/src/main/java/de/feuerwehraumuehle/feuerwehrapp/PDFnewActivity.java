@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -36,7 +37,7 @@ import de.feuerwehraumuehle.feuerwehrapp.helper.Utils;
 import de.feuerwehraumuehle.feuerwehrapp.view.CustomScrollHandle;
 
 @EActivity(R.layout.activity_pdfnew)
-@OptionsMenu(R.menu.menu)
+@OptionsMenu(R.menu.menu_pdf)
 public class PDFnewActivity extends AppCompatActivity implements OnPageChangeListener, OnLoadCompleteListener {
 
 	private static final String TAG = PDFnewActivity.class.getSimpleName();
@@ -239,6 +240,8 @@ public class PDFnewActivity extends AppCompatActivity implements OnPageChangeLis
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
 			startActivity(intent);
+		} else if(item.getItemId() == R.id.scrolltop) {
+			pdfView.jumpTo(0);
 		}
 		return false;
 	}

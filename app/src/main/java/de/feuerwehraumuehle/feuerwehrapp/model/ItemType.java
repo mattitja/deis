@@ -8,5 +8,6 @@ public enum ItemType {
     DIRECTORY,
     PDF,
     IMAGE,
+    LINK,
     UNDEFINED
 }

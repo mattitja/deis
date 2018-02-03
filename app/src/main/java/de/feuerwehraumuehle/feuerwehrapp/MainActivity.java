@@ -18,11 +18,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import de.feuerwehraumuehle.feuerwehrapp.adapter.MenuItemAdapter;
+import de.feuerwehraumuehle.feuerwehrapp.helper.Utils;
 import de.feuerwehraumuehle.feuerwehrapp.manager.ConfigurationManager;
 import de.feuerwehraumuehle.feuerwehrapp.manager.FileManager;
-import de.feuerwehraumuehle.feuerwehrapp.helper.Utils;
 import de.feuerwehraumuehle.feuerwehrapp.model.Item;
 import de.feuerwehraumuehle.feuerwehrapp.model.ItemType;
+import de.feuerwehraumuehle.feuerwehrapp.model.Link;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -94,8 +95,10 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("pdf_path", item.getAbsolutePath());
                     intent.putExtra("displayName", item.getDisplayName());
                     startActivity(intent);
+                } else if ((item.getType() == ItemType.LINK)) {
+                	openApp(MainActivity.this, ((Link) item).getPackageName());
                 } else {
-                    Toast.makeText(getApplicationContext(), item.getType().toString(), Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), item.getType().toString(), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -121,29 +124,27 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if (item.getItemId() == R.id.root) {
             Intent intent = new Intent(MainActivity.this, MainActivity.class);
-
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
             startActivity(intent);
-            //openApp(this, "com.google.android.apps.maps");
-
         }
         return false;
     }
 
-    public static boolean openApp(Context context, String packageName) {
+    public void openApp(Context context, String packageName) {
         PackageManager manager = context.getPackageManager();
-        try {
-            Intent i = manager.getLaunchIntentForPackage(packageName);
-            if (i == null) {
-                return false;
-                //throw new ActivityNotFoundException();
+		try {
+			Intent i = manager.getLaunchIntentForPackage(packageName);
+			if (i == null) {
+                throw new ActivityNotFoundException();
             }
             i.addCategory(Intent.CATEGORY_LAUNCHER);
             context.startActivity(i);
-            return true;
         } catch (ActivityNotFoundException e) {
-            return false;
+            Toast.makeText(getApplicationContext(), "App mit dem Package-Namen \"" + packageName + "\" nicht " +
+                            "gefunden.",
+					Toast
+					.LENGTH_SHORT)
+					.show();
         }
     }
 }

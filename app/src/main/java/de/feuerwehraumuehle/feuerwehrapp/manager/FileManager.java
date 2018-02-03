@@ -11,6 +11,7 @@ import de.feuerwehraumuehle.feuerwehrapp.config.parser.ItemParser;
 import de.feuerwehraumuehle.feuerwehrapp.exceptions.SeriousConfigurationIssueException;
 import de.feuerwehraumuehle.feuerwehrapp.model.Item;
 import de.feuerwehraumuehle.feuerwehrapp.model.ItemType;
+import de.feuerwehraumuehle.feuerwehrapp.model.Link;
 
 /**
  * Created by Matze on 19.02.2017.
@@ -55,12 +56,12 @@ public class FileManager {
         // CFG Handling
         HashMap<String, ItemConfiguration> cfgs = new HashMap<>();
 
+        ItemParser parser = new ItemParser();
         for (File file : files) {
             if (file.getName().toUpperCase().endsWith(".CFG")) {
-                ItemParser parser = new ItemParser();
-                ItemConfiguration config = (ItemConfiguration) parser.parse(file);
+                ItemConfiguration config = parser.parse(file);
                 if (config != null) {
-                    cfgs.put(file.getName().substring(0, file.getName().indexOf(".")), config);
+                    cfgs.put(file.getName().substring(0, file.getName().lastIndexOf(".")), config);
                 }
             }
         }
@@ -75,12 +76,16 @@ public class FileManager {
                     newItem.setType(ItemType.PDF);
                 } else if (file.getName().toUpperCase().endsWith(".JPG")) {
                     newItem.setType(ItemType.IMAGE);
+                } else if (file.getName().toUpperCase().endsWith(".LINK")) {
+                    String packageName = file.getName().substring(0, file.getName().length()-".LINK".length());
+                    newItem = new Link(packageName);
+                    newItem.setType(ItemType.LINK);
                 } else {
                     newItem.setType(ItemType.UNDEFINED);
                 }
                 String name = file.getName();
                 if (name.contains(".")) {
-                    int i = name.indexOf(".");
+                    int i = name.lastIndexOf(".");
                     name = name.substring(0, i);
                 }
                 newItem.setDisplayName(name);

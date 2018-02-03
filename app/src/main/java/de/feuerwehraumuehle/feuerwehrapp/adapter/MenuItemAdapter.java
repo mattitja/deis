@@ -74,6 +74,8 @@ public class MenuItemAdapter extends BaseAdapter {
 			loadImage("icon_folder", "icon_folder", type);
 		} else if (item.getType() == ItemType.PDF) {
 			loadImage("icon_pdf", "icon_pdf", type);
+		} else if (item.getType() == ItemType.LINK) {
+			loadImage("icon_link", "icon_link", type);
 		}
 	}
 

@@ -4,6 +4,8 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import de.feuerwehraumuehle.feuerwehrapp.config.ItemConfiguration;
@@ -77,20 +79,23 @@ public class FileManager {
                 } else if (file.getName().toUpperCase().endsWith(".JPG")) {
                     newItem.setType(ItemType.IMAGE);
                 } else if (file.getName().toUpperCase().endsWith(".LINK")) {
-                    String packageName = file.getName().substring(0, file.getName().length()-".LINK".length());
+                    String packageName = file.getName().substring(
+                            file.getName().indexOf("...") + "...".length(),
+                            file.getName().length()-".LINK".length());
                     newItem = new Link(packageName);
                     newItem.setType(ItemType.LINK);
                 } else {
                     newItem.setType(ItemType.UNDEFINED);
                 }
-                String name = file.getName();
-                if (name.contains(".")) {
-                    int i = name.lastIndexOf(".");
-                    name = name.substring(0, i);
+                String rawName = file.getName();
+                if (rawName.contains(".")) {
+                    int i = rawName.lastIndexOf(".");
+                    rawName = rawName.substring(0, i);
                 }
-                newItem.setDisplayName(name);
-                if (cfgs.containsKey(name)) {
-                    ItemConfiguration configuration = cfgs.get(name);
+                newItem.setDisplayName(rawName);
+                newItem.setRawName(rawName);
+                if (cfgs.containsKey(rawName)) {
+                    ItemConfiguration configuration = cfgs.get(rawName);
                     newItem.setButtonColor(configuration.buttonColor);
                     newItem.setTextColor(configuration.textColor);
                     newItem.setDisplayName(configuration.displayName != null ? configuration.displayName : newItem
@@ -106,6 +111,12 @@ public class FileManager {
                 }
             }
         }
+        Collections.sort(currentFDirectory.getChildren(), new Comparator<Item>() {
+            @Override
+            public int compare(Item s1, Item s2) {
+                return s1.getRawName().compareToIgnoreCase(s2.getRawName());
+            }
+        });
     }
 
     public Item getRootItem() {

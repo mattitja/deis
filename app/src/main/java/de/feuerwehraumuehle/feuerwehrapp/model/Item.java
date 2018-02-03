@@ -15,6 +15,7 @@ public class Item {
     private int buttonColor;
     private int textColor;
     private String icon;
+    private String rawName;
 
     public Item() {
         children = new ArrayList<>();
@@ -74,5 +75,13 @@ public class Item {
 
     public void setIcon(String iconName) {
         this.icon = iconName;
+    }
+
+    public String getRawName() {
+        return rawName;
+    }
+
+    public void setRawName(String rawName) {
+        this.rawName = rawName;
     }
 }

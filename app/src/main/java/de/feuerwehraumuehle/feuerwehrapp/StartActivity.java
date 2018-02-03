@@ -12,6 +12,13 @@ import android.view.View;
 import android.widget.ImageView;
 
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+
+import de.feuerwehraumuehle.feuerwehrapp.exceptions.SeriousConfigurationIssueException;
+import de.feuerwehraumuehle.feuerwehrapp.manager.ConfigurationManager;
+import de.feuerwehraumuehle.feuerwehrapp.manager.FileManager;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -22,16 +29,6 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         Handler handler = new Handler();
-
-        if (savedInstanceState == null) {
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    Intent intent = new Intent(StartActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }, 1700);
-        }
 
         ImageView imageView = (ImageView) findViewById(R.id.start_image);
 
@@ -45,6 +42,46 @@ public class StartActivity extends AppCompatActivity {
 
         loadImage(imageName, imageView);
 
+        if (isInitialStart(savedInstanceState)) {
+            ConfigurationManager configManager = ConfigurationManager.getInstance();
+            FileManager fileManager = FileManager.getInstance();
+
+            try {
+                configManager.init();
+                fileManager.init();
+            } catch (Exception e) {
+                displayException(e);
+                return;
+            }
+
+            startMainActivityAfterShortBreak(handler);
+        }
+    }
+
+    private void displayException(Exception e) {
+        e.printStackTrace();
+        Writer writer = new StringWriter();
+        e.printStackTrace(new PrintWriter(writer));
+        String stacktrace = writer.toString();
+        Intent intent = new Intent(this, ErrorActivity.class);
+        intent.putExtra("msg", e.getMessage());
+        intent.putExtra("stacktrace", stacktrace);
+        startActivity(intent);
+        finish();
+    }
+
+    private void startMainActivityAfterShortBreak(Handler handler) {
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }, 1700);
+    }
+
+    private boolean isInitialStart(Bundle savedInstanceState) {
+        return savedInstanceState == null;
     }
 
     private void loadImage(String iconName, ImageView view) {

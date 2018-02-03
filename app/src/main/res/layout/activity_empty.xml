@@ -8,16 +8,33 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="de.feuerwehraumuehle.feuerwehrapp.EmptyActivity"
-    android:background="@color/windowBackground">
+    tools:context="de.feuerwehraumuehle.feuerwehrapp.ErrorActivity"
+    android:background="@android:color/black">
 
-    <TextView
-        android:id="@+id/msg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text=""
-        android:textColor="@android:color/white"
-        android:textSize="20dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="error"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/stacktrace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="stacktrace"
+            android:textColor="@android:color/white"
+            android:textSize="10dp" />
+    </LinearLayout>
+
+
 
 </FrameLayout>

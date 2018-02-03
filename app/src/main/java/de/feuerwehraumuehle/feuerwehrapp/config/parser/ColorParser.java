@@ -16,11 +16,11 @@ import de.feuerwehraumuehle.feuerwehrapp.config.Configuration;
 public class ColorParser extends AbstractConfigurationParser {
 
 	@Override
-	public ColorMap parse(File file) {
+	public ColorMap parse(File file) throws Exception {
 		return (ColorMap) super.parse(file);
 	}
 
-	protected Configuration map(XmlPullParser parser) throws XmlPullParserException, IOException {
+	protected Configuration map(XmlPullParser parser) throws Exception {
 		parser.require(XmlPullParser.START_TAG, ns, "colors");
 		ColorMap colorMap = new ColorMap();
 		while (parser.next() != XmlPullParser.END_TAG) {

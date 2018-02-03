@@ -20,30 +20,25 @@ public abstract class AbstractConfigurationParser {
 
 	static final String ns = null;
 
-	public Configuration parse(File in) {
-		try {
-			InputStream stream = new FileInputStream(in);
-			XmlPullParser parser = Xml.newPullParser();
-			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-			parser.setInput(stream, null);
-			parser.nextTag();
-			return map(parser);
-		} catch (XmlPullParserException | IOException e) {
-			e.printStackTrace();
-			return null;
-		}
+	public Configuration parse(File in) throws Exception {
+		InputStream stream = new FileInputStream(in);
+		XmlPullParser parser = Xml.newPullParser();
+		parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+		parser.setInput(stream, null);
+		parser.nextTag();
+		return map(parser);
 	}
 
-	protected abstract Configuration map(XmlPullParser parser) throws XmlPullParserException, IOException;
+	protected abstract Configuration map(XmlPullParser parser) throws Exception;
 
-	String readAttribute(XmlPullParser parser, String tag) throws IOException, XmlPullParserException {
+	String readAttribute(XmlPullParser parser, String tag) throws Exception {
 		parser.require(XmlPullParser.START_TAG, ns, tag);
 		String attr = readText(parser);
 		parser.require(XmlPullParser.END_TAG, ns, tag);
 		return attr;
 	}
 
-	private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
+	private String readText(XmlPullParser parser) throws Exception {
 		String result = "";
 		if (parser.next() == XmlPullParser.TEXT) {
 			result = parser.getText();
@@ -52,7 +47,7 @@ public abstract class AbstractConfigurationParser {
 		return result;
 	}
 
-	void skip(XmlPullParser parser) throws XmlPullParserException, IOException {
+	void skip(XmlPullParser parser) throws Exception {
 		if (parser.getEventType() != XmlPullParser.START_TAG) {
 			throw new IllegalStateException();
 		}

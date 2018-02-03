@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import de.feuerwehraumuehle.feuerwehrapp.helper.Utils;
 
-public class EmptyActivity extends AppCompatActivity {
+public class ErrorActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +15,11 @@ public class EmptyActivity extends AppCompatActivity {
         Utils.setStatusBarColor(this);
 
         String msg = getIntent().getStringExtra("msg");
+        String stacktrace = getIntent().getStringExtra("stacktrace");
         TextView tv = (TextView) findViewById(R.id.msg);
         tv.setText(msg);
+
+        TextView stacktraceTv = (TextView) findViewById(R.id.stacktrace);
+        stacktraceTv.setText(stacktrace);
     }
 }

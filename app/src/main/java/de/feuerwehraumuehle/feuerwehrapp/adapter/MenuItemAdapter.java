@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import java.io.File;
 
-import de.feuerwehraumuehle.feuerwehrapp.FeuerwehrApp;
 import de.feuerwehraumuehle.feuerwehrapp.R;
+import de.feuerwehraumuehle.feuerwehrapp.manager.ConfigurationManager;
 import de.feuerwehraumuehle.feuerwehrapp.model.Item;
 import de.feuerwehraumuehle.feuerwehrapp.model.ItemType;
 
@@ -64,7 +64,7 @@ public class MenuItemAdapter extends BaseAdapter {
 
 		loadFolderImage(type, item);
 
-		loadImage(item.getIcon(), FeuerwehrApp.globalDefaults.defaultIcon, icon);
+		loadImage(item.getIcon(), ConfigurationManager.globalDefaults.defaultIcon, icon);
 
 		return view;
 	}

@@ -1,13 +1,14 @@
-package de.feuerwehraumuehle.feuerwehrapp.data;
+package de.feuerwehraumuehle.feuerwehrapp.manager;
 
-import android.content.Context;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
-import de.feuerwehraumuehle.feuerwehrapp.FeuerwehrApp;
 import de.feuerwehraumuehle.feuerwehrapp.config.ItemConfiguration;
 import de.feuerwehraumuehle.feuerwehrapp.config.parser.ItemParser;
+import de.feuerwehraumuehle.feuerwehrapp.exceptions.SeriousConfigurationIssueException;
 import de.feuerwehraumuehle.feuerwehrapp.model.Item;
 import de.feuerwehraumuehle.feuerwehrapp.model.ItemType;
 
@@ -19,34 +20,34 @@ public class FileManager {
 
     private static FileManager instance;
 
-    public static FileManager getInstance(Context context) throws StartFolderNotFoundException, StartFolderContainsNoItems {
+    public static FileManager getInstance() {
         if (instance == null) {
-            instance = new FileManager(context);
+            instance = new FileManager();
         }
         return instance;
     }
 
     private Item rootItem;
 
-    private FileManager(Context context) throws StartFolderNotFoundException,
-            StartFolderContainsNoItems {
-        String sdcardPath = FeuerwehrApp.getSDCardPath();
+    public void init() throws Exception {
+        String sdcardPath = ConfigurationManager.getSDCardPath();
         File dataStartFolder = new File(sdcardPath, "feuerwehr/data");
         if (dataStartFolder.isDirectory() && dataStartFolder.listFiles().length == 0) {
-            throw new StartFolderNotFoundException();
+            String msg = "Entweder " + sdcardPath + "/feuerwehr existiert nicht oder " +
+                    "die Berechtigung " +
+                    "\"Speicher\" muss erst noch in den App-Einstellungen gegeben werden.";
+            //TODO check for permission
+            throw new SeriousConfigurationIssueException(msg);
         } else if(dataStartFolder.listFiles().length == 0) {
-            throw new StartFolderContainsNoItems();
+            String msg = sdcardPath + "/feuerwehr beinhaltet nichts";
+            throw new SeriousConfigurationIssueException(msg);
         }
-        rootItem = new Item();
 
+        rootItem = new Item();
         scanDirectory(dataStartFolder, rootItem);
     }
 
-    public Item getRootItem() {
-        return rootItem;
-    }
-
-    private void scanDirectory(File directory, Item currentFDirectory) {
+    private void scanDirectory(File directory, Item currentFDirectory) throws Exception {
         File[] files = directory.listFiles();
         if (files == null) {
             return;
@@ -91,9 +92,9 @@ public class FileManager {
                             .getDisplayName());
                     newItem.setIcon(configuration.icon);
                 } else {
-                    newItem.setButtonColor(FeuerwehrApp.globalDefaults.defaultButtonColor);
-                    newItem.setTextColor(FeuerwehrApp.globalDefaults.defaultTextColor);
-                    newItem.setIcon(FeuerwehrApp.globalDefaults.defaultIcon);
+                    newItem.setButtonColor(ConfigurationManager.globalDefaults.defaultButtonColor);
+                    newItem.setTextColor(ConfigurationManager.globalDefaults.defaultTextColor);
+                    newItem.setIcon(ConfigurationManager.globalDefaults.defaultIcon);
                 }
                 if (newItem.getType() != ItemType.UNDEFINED) {
                     currentFDirectory.addChildren(newItem);
@@ -102,9 +103,7 @@ public class FileManager {
         }
     }
 
-    public class StartFolderNotFoundException extends Exception {
-    }
-
-    public class StartFolderContainsNoItems extends Exception {
+    public Item getRootItem() {
+        return rootItem;
     }
 }

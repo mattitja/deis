@@ -11,8 +11,6 @@ import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -27,13 +25,13 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.NonConfigurationInstance;
 import org.androidannotations.annotations.OnActivityResult;
-import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
 import java.io.File;
 import java.util.List;
 
+import de.feuerwehraumuehle.feuerwehrapp.manager.ConfigurationManager;
 import de.feuerwehraumuehle.feuerwehrapp.helper.Utils;
 import de.feuerwehraumuehle.feuerwehrapp.view.CustomScrollHandle;
 
@@ -55,7 +53,7 @@ public class PDFnewActivity extends AppCompatActivity implements OnPageChangeLis
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(FeuerwehrApp.globalDefaults.defaultMenuBackgroundColor));
+		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ConfigurationManager.globalDefaults.defaultMenuBackgroundColor));
 	}
 
 	@Override

@@ -17,7 +17,7 @@
             android:layout_height="30dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:alpha="0.7"
+            android:alpha="1"
             android:src="@mipmap/ic_folder_black_48dp" />
 
 
@@ -26,8 +26,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:paddingTop="20dp">
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/icon"
@@ -36,12 +35,12 @@
                 android:alpha="1"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:paddingBottom="30dp"
                 android:layout_above="@+id/category_name"
                 android:src="@drawable/ic_home_white_48dp" />
 
             <TextView
                 android:id="@+id/category_name"
+                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

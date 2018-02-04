@@ -12,11 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".MenuActivity"
             android:theme="@style/AppTheme.ActionBar"/>
-        <activity
-            android:name=".PDFActivity"
-            android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".ErrorActivity"
             android:theme="@style/AppTheme.StartScreen" />

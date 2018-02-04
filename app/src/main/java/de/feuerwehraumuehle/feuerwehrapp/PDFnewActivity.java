@@ -13,7 +13,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -51,16 +50,21 @@ public class PDFnewActivity extends AppCompatActivity implements OnPageChangeLis
 	String pdfPath;
 
 	@Override
-	protected void onCreate(@Nullable Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ConfigurationManager.globalDefaults.defaultMenuBackgroundColor));
+		actionBarStyling();
+	}
+
+	private void actionBarStyling() {
+		Utils.activateActionBarBackButton(getSupportActionBar(), true);
+		Utils.setActionBarBackgroundColor(getSupportActionBar(),
+				ConfigurationManager.globalDefaults.defaultMenuBackgroundColor);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Utils.setStatusBarColor(this);
+		Utils.setStatusBarBlack(this);
 		pdfPath = getIntent().getStringExtra("pdf_path");
 		displayName = getIntent().getStringExtra("displayName");
 		Uri uri = Uri.fromFile(new File(pdfPath));
@@ -235,7 +239,7 @@ public class PDFnewActivity extends AppCompatActivity implements OnPageChangeLis
 			finish();
 			return true;
 		} else if (item.getItemId() == R.id.root) {
-			Intent intent = new Intent(PDFnewActivity.this, MainActivity.class);
+			Intent intent = new Intent(PDFnewActivity.this, MenuActivity.class);
 
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 

@@ -16,9 +16,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import java.io.File;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
 
 import de.feuerwehraumuehle.feuerwehrapp.manager.ConfigurationManager;
 import de.feuerwehraumuehle.feuerwehrapp.manager.FileManager;
@@ -81,38 +78,19 @@ public class StartActivity extends AppCompatActivity {
 			configManager.init();
 			fileManager.init();
 		} catch (Exception e) {
-			displayException(e);
+			ErrorActivity.handleExceptionAndCloseCurrentActivity(this, e);
 			return;
 		}
 
 		startMainActivityAfterShortBreak();
 	}
 
-	private void displayException(Exception e) {
-		e.printStackTrace();
-		String stacktrace = stacktraceToString(e);
-		startErrorActivity(e, stacktrace);
-		finish();
-	}
-
-	private String stacktraceToString(Exception e) {
-		Writer writer = new StringWriter();
-		e.printStackTrace(new PrintWriter(writer));
-		return writer.toString();
-	}
-
-	private void startErrorActivity(Exception e, String stacktrace) {
-		Intent intent = new Intent(this, ErrorActivity.class);
-		intent.putExtra("msg", e.getMessage());
-		intent.putExtra("stacktrace", stacktrace);
-		startActivity(intent);
-	}
 
 	private void startMainActivityAfterShortBreak() {
 		Handler handler = new Handler();
 		handler.postDelayed(new Runnable() {
 			public void run() {
-				Intent intent = new Intent(StartActivity.this, MainActivity.class);
+				Intent intent = new Intent(StartActivity.this, MenuActivity.class);
 				startActivity(intent);
 				finish();
 			}

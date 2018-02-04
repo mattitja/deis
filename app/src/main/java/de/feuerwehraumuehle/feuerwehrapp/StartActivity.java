@@ -29,13 +29,14 @@ public class StartActivity extends AppCompatActivity {
 
     public final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1337;
 
+    public final int START_SCREEN_DURATION = 1700;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
         if (isInitialStart(savedInstanceState)) {
-            // Here, thisActivity is the current activity
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.READ_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -44,24 +45,32 @@ public class StartActivity extends AppCompatActivity {
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
             } else {
-                loadBackgroundImage();
-                loadAllData();
+                proceedWithStoragePermission();
             }
         }
     }
 
-    private void loadBackgroundImage() {
+    private boolean isInitialStart(Bundle savedInstanceState) {
+        return savedInstanceState == null || !savedInstanceState.getBoolean(RESUMED);
+    }
+
+    private void proceedWithStoragePermission() {
+        loadActivityBackgroundImage();
+        loadAllData();
+    }
+
+    private void loadActivityBackgroundImage() {
         ImageView imageView = (ImageView) findViewById(R.id.start_image);
 
-        int orientation = getResources().getConfiguration().orientation;
-        String imageName = "";
-        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            imageName = "start_portrait.jpg";
+        int currentOrientation = getResources().getConfiguration().orientation;
+        String imageToShow = "";
+        if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
+            imageToShow = "start_portrait.jpg";
         } else {
-            imageName = "start_landscape.jpg";
+            imageToShow = "start_landscape.jpg";
         }
 
-        loadImage(imageName, imageView);
+        loadImage(imageToShow, imageView);
     }
 
     private void loadAllData() {
@@ -81,14 +90,22 @@ public class StartActivity extends AppCompatActivity {
 
     private void displayException(Exception e) {
         e.printStackTrace();
+        String stacktrace = stacktraceToString(e);
+        startErrorActivity(e, stacktrace);
+        finish();
+    }
+
+    private String stacktraceToString(Exception e) {
         Writer writer = new StringWriter();
         e.printStackTrace(new PrintWriter(writer));
-        String stacktrace = writer.toString();
+        return writer.toString();
+    }
+
+    private void startErrorActivity(Exception e, String stacktrace) {
         Intent intent = new Intent(this, ErrorActivity.class);
         intent.putExtra("msg", e.getMessage());
         intent.putExtra("stacktrace", stacktrace);
         startActivity(intent);
-        finish();
     }
 
     private void startMainActivityAfterShortBreak() {
@@ -99,11 +116,7 @@ public class StartActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 1700);
-    }
-
-    private boolean isInitialStart(Bundle savedInstanceState) {
-        return savedInstanceState == null;
+        }, START_SCREEN_DURATION);
     }
 
     private void loadImage(String iconName, ImageView view) {
@@ -122,12 +135,10 @@ public class StartActivity extends AppCompatActivity {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    loadBackgroundImage();
-                    loadAllData();
+                    proceedWithStoragePermission();
                 } else {
                     finish();
                 }
-                return;
             }
         }
     }

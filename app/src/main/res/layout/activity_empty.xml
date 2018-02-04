@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_empty"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="de.feuerwehraumuehle.feuerwehrapp.ErrorActivity"
-    android:background="@android:color/black">
+<FrameLayout android:id="@+id/activity_empty"
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@android:color/black"
+             android:paddingBottom="@dimen/activity_vertical_margin"
+             android:paddingLeft="@dimen/activity_horizontal_margin"
+             android:paddingRight="@dimen/activity_horizontal_margin"
+             android:paddingTop="@dimen/activity_vertical_margin"
+             tools:context="de.feuerwehraumuehle.feuerwehrapp.ErrorActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:orientation="vertical">
+
         <TextView
-            android:id="@+id/msg"
+            android:id="@+id/headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="error"
             android:textColor="@android:color/white"
-            android:textSize="20dp" />
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/stacktrace"
@@ -32,9 +33,6 @@
             android:gravity="center"
             android:text="stacktrace"
             android:textColor="@android:color/white"
-            android:textSize="10dp" />
+            android:textSize="10sp"/>
     </LinearLayout>
-
-
-
 </FrameLayout>

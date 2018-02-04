@@ -45,7 +45,7 @@ public class ErrorActivity extends AppCompatActivity {
 		String headline = getIntent().getStringExtra(INTENT_MESSAGE);
 		String stacktrace = getIntent().getStringExtra(INTENT_STACKTRACE);
 
-		TextView headlineTv = (TextView) findViewById(R.id.msg);
+		TextView headlineTv = (TextView) findViewById(R.id.headline);
 		TextView stacktraceTv = (TextView) findViewById(R.id.stacktrace);
 
 		headlineTv.setText(headline);

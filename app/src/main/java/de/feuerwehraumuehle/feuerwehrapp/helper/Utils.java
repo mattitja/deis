@@ -19,7 +19,7 @@ public class Utils {
 		Window window = activity.getWindow();
 		window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 		window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-		window.setStatusBarColor(activity.getResources().getColor(R.color.colorPrimaryDark));
+		window.setStatusBarColor(activity.getResources().getColor(android.R.color.black));
 	}
 
 	public static void setActionBarTitle(ActionBar actionBar, String message) {

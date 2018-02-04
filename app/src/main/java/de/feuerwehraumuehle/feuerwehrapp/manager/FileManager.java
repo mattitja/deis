@@ -1,13 +1,13 @@
 package de.feuerwehraumuehle.feuerwehrapp.manager;
 
-import org.xmlpull.v1.XmlPullParserException;
+import android.support.annotation.NonNull;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 
+import de.feuerwehraumuehle.feuerwehrapp.DEISApplication;
 import de.feuerwehraumuehle.feuerwehrapp.config.ItemConfiguration;
 import de.feuerwehraumuehle.feuerwehrapp.config.parser.ItemParser;
 import de.feuerwehraumuehle.feuerwehrapp.exceptions.SeriousConfigurationIssueException;
@@ -33,41 +33,25 @@ public class FileManager {
     private Item rootItem;
 
     public void init() throws Exception {
-        String sdcardPath = ConfigurationManager.getSDCardPath();
-        File dataStartFolder = new File(sdcardPath, "feuerwehr/data");
-        if (dataStartFolder.isDirectory() && dataStartFolder.listFiles().length == 0) {
-            String msg = "Entweder " + sdcardPath + "/feuerwehr existiert nicht oder " +
-                    "die Berechtigung " +
-                    "\"Speicher\" muss erst noch in den App-Einstellungen gegeben werden.";
-            //TODO check for permission
+        File dataDirectory = new File(DEISApplication.getDataPath());
+        if (!dataDirectory.exists() || !dataDirectory.isDirectory()) {
+            String msg = "Der Ordner " + DEISApplication.getDataPath() + " existiert nicht.";
             throw new SeriousConfigurationIssueException(msg);
-        } else if(dataStartFolder.listFiles().length == 0) {
-            String msg = sdcardPath + "/feuerwehr beinhaltet nichts";
+        } else if(dataDirectory.listFiles().length == 0) {
+            String msg = "Der Ordner " + DEISApplication.getDataPath() + " beinhaltet nichts.";
             throw new SeriousConfigurationIssueException(msg);
         }
 
         rootItem = new Item();
-        scanDirectory(dataStartFolder, rootItem);
+        scanDirectory(dataDirectory, rootItem);
     }
 
-    private void scanDirectory(File directory, Item currentFDirectory) throws Exception {
-        File[] files = directory.listFiles();
-        if (files == null) {
-            return;
-        }
-        // CFG Handling
-        HashMap<String, ItemConfiguration> cfgs = new HashMap<>();
+    private void scanDirectory(File dataDirectory, Item currentItem) throws Exception {
+        File[] allDataFiles = dataDirectory.listFiles();
 
-        ItemParser parser = new ItemParser();
-        for (File file : files) {
-            if (file.getName().toUpperCase().endsWith(".CFG")) {
-                ItemConfiguration config = parser.parse(file);
-                if (config != null) {
-                    cfgs.put(file.getName().substring(0, file.getName().lastIndexOf(".")), config);
-                }
-            }
-        }
-        for (File file : files) {
+        HashMap<String, ItemConfiguration> itemConfigurations = loadItemConfigurations(allDataFiles);
+
+        for (File file : allDataFiles) {
             if (!file.getName().toUpperCase().endsWith(".CFG")) {
                 Item newItem = new Item();
                 newItem.setAbsolutePath(file.getAbsolutePath());
@@ -94,29 +78,45 @@ public class FileManager {
                 }
                 newItem.setDisplayName(rawName);
                 newItem.setRawName(rawName);
-                if (cfgs.containsKey(rawName)) {
-                    ItemConfiguration configuration = cfgs.get(rawName);
+                if (itemConfigurations.containsKey(rawName)) {
+                    ItemConfiguration configuration = itemConfigurations.get(rawName);
                     newItem.setButtonColor(configuration.buttonColor);
                     newItem.setTextColor(configuration.textColor);
                     newItem.setDisplayName(configuration.displayName != null ? configuration.displayName : newItem
                             .getDisplayName());
                     newItem.setIcon(configuration.icon);
                 } else {
-                    newItem.setButtonColor(ConfigurationManager.globalDefaults.defaultButtonColor);
-                    newItem.setTextColor(ConfigurationManager.globalDefaults.defaultTextColor);
-                    newItem.setIcon(ConfigurationManager.globalDefaults.defaultIcon);
+                    newItem.setButtonColor(GlobalConfigurationsManager.globalDefaults.defaultButtonColor);
+                    newItem.setTextColor(GlobalConfigurationsManager.globalDefaults.defaultTextColor);
+                    newItem.setIcon(GlobalConfigurationsManager.globalDefaults.defaultIcon);
                 }
                 if (newItem.getType() != ItemType.UNDEFINED) {
-                    currentFDirectory.addChildren(newItem);
+                    currentItem.addChildren(newItem);
                 }
             }
         }
-        Collections.sort(currentFDirectory.getChildren(), new Comparator<Item>() {
+        Collections.sort(currentItem.getChildren(), new Comparator<Item>() {
             @Override
             public int compare(Item s1, Item s2) {
                 return s1.getRawName().compareToIgnoreCase(s2.getRawName());
             }
         });
+    }
+
+    @NonNull
+    private HashMap<String, ItemConfiguration> loadItemConfigurations(File[] allDataFiles) throws Exception {
+        HashMap<String, ItemConfiguration> itemConfigurations = new HashMap<>();
+
+        ItemParser parser = new ItemParser();
+        for (File file : allDataFiles) {
+            if (file.getName().toUpperCase().endsWith(".CFG")) {
+                ItemConfiguration config = parser.parse(file);
+                if (config != null) {
+                    itemConfigurations.put(file.getName().substring(0, file.getName().lastIndexOf(".")), config);
+                }
+            }
+        }
+        return itemConfigurations;
     }
 
     public Item getRootItem() {

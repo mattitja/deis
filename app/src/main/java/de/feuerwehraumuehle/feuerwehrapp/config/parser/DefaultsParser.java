@@ -1,15 +1,13 @@
 package de.feuerwehraumuehle.feuerwehrapp.config.parser;
 
 import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
-import java.io.IOException;
 
 import de.feuerwehraumuehle.feuerwehrapp.config.Configuration;
 import de.feuerwehraumuehle.feuerwehrapp.config.GlobalDefaults;
 import de.feuerwehraumuehle.feuerwehrapp.exceptions.SeriousConfigurationIssueException;
-import de.feuerwehraumuehle.feuerwehrapp.manager.ConfigurationManager;
+import de.feuerwehraumuehle.feuerwehrapp.manager.GlobalConfigurationsManager;
 
 /**
  * Created by mmi on 31.01.2018.
@@ -17,48 +15,51 @@ import de.feuerwehraumuehle.feuerwehrapp.manager.ConfigurationManager;
 
 public class DefaultsParser extends AbstractConfigurationParser {
 
+	private final String TAG_ROOT = "defaults";
+	private final String TAG_BUTTON_COLOR = "buttonColor";
+	private final String TAG_BACKGROUND_COLOR = "backgroundColor";
+	private final String TAG_TEXT_COLOR = "textColor";
+	private final String TAG_ICON = "icon";
+	private final String TAG_MENU_BACKGROUND_COLOR = "menuBackgroundColor";
+
 	@Override
 	public GlobalDefaults parse(File file) throws Exception {
 		return (GlobalDefaults) super.parse(file);
 	}
 
 	protected Configuration map(XmlPullParser parser) throws Exception {
-		parser.require(XmlPullParser.START_TAG, ns, "defaults");
+		parser.require(XmlPullParser.START_TAG, ns, TAG_ROOT);
 		int defaultButtonColor = 0;
 		int defaultTextColor = 0;
 		String defaultIcon = null;
 		int defaultBackgroundColor = 0;
 		int defaultMenuBackgroundColor = 0;
-		boolean randomizeAllButtonColors = false;
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
 			String name = parser.getName();
-			if (name.equals("buttonColor")) {
-				defaultButtonColor = ConfigurationManager.getColorByColorSomething(readAttribute(parser, "buttonColor"));
-			} else if (name.equals("backgroundColor")) {
-				defaultBackgroundColor = ConfigurationManager.getColorByColorSomething(readAttribute(parser, "backgroundColor"));
-			} else if (name.equals("textColor")) {
-				defaultTextColor = ConfigurationManager.getColorByColorSomething(readAttribute(parser, "textColor"));
-			} else if (name.equals("icon")) {
-				defaultIcon = readAttribute(parser, "icon");
-			} else if (name.equals("menuBackgroundColor")) {
-				defaultMenuBackgroundColor = ConfigurationManager.getColorByColorSomething(readAttribute(parser, "menuBackgroundColor"));
-			} else if (name.equals("randomizeAllButtonColors")) {
-				String bool = readAttribute(parser, "randomizeAllButtonColors");
-				randomizeAllButtonColors = "true".equalsIgnoreCase(bool);
+			if (name.equals(TAG_BUTTON_COLOR)) {
+				defaultButtonColor = GlobalConfigurationsManager.getColorByColorSomething(readAttribute(parser, TAG_BUTTON_COLOR));
+			} else if (name.equals(TAG_BACKGROUND_COLOR)) {
+				defaultBackgroundColor = GlobalConfigurationsManager.getColorByColorSomething(readAttribute(parser, TAG_BACKGROUND_COLOR));
+			} else if (name.equals(TAG_TEXT_COLOR)) {
+				defaultTextColor = GlobalConfigurationsManager.getColorByColorSomething(readAttribute(parser, TAG_TEXT_COLOR));
+			} else if (name.equals(TAG_ICON)) {
+				defaultIcon = readAttribute(parser, TAG_ICON);
+			} else if (name.equals(TAG_MENU_BACKGROUND_COLOR)) {
+				defaultMenuBackgroundColor = GlobalConfigurationsManager.getColorByColorSomething(readAttribute(parser, TAG_MENU_BACKGROUND_COLOR));
 			} else {
 				skip(parser);
 			}
 		}
 
-		checkIfDefaultIsSet("backgroundColor", defaultBackgroundColor);
-		checkIfDefaultIsSet("buttonColor", defaultButtonColor);
-		checkIfDefaultIsSet("textColor", defaultTextColor);
-		checkIfDefaultIsSet("menuBackgroundColor", defaultMenuBackgroundColor);
+		checkIfDefaultIsSet(TAG_BUTTON_COLOR, defaultButtonColor);
+		checkIfDefaultIsSet(TAG_BACKGROUND_COLOR, defaultBackgroundColor);
+		checkIfDefaultIsSet(TAG_TEXT_COLOR, defaultTextColor);
+		checkIfDefaultIsSet(TAG_MENU_BACKGROUND_COLOR, defaultMenuBackgroundColor);
 
-		return new GlobalDefaults(defaultButtonColor, defaultTextColor, defaultIcon, defaultBackgroundColor, defaultMenuBackgroundColor, randomizeAllButtonColors);
+		return new GlobalDefaults(defaultButtonColor, defaultTextColor, defaultIcon, defaultBackgroundColor, defaultMenuBackgroundColor);
 	}
 
 	private void checkIfDefaultIsSet(String propertyName, int color) throws SeriousConfigurationIssueException {

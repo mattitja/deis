@@ -17,7 +17,7 @@ import android.widget.ImageView;
 
 import java.io.File;
 
-import de.feuerwehraumuehle.feuerwehrapp.manager.ConfigurationManager;
+import de.feuerwehraumuehle.feuerwehrapp.manager.GlobalConfigurationsManager;
 import de.feuerwehraumuehle.feuerwehrapp.manager.FileManager;
 
 public class StartActivity extends AppCompatActivity {
@@ -71,7 +71,7 @@ public class StartActivity extends AppCompatActivity {
 	}
 
 	private void loadAllData() {
-		ConfigurationManager configManager = ConfigurationManager.getInstance();
+		GlobalConfigurationsManager configManager = GlobalConfigurationsManager.getInstance();
 		FileManager fileManager = FileManager.getInstance();
 
 		try {

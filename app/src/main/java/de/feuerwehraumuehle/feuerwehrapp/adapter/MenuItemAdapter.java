@@ -12,8 +12,9 @@ import android.widget.TextView;
 
 import java.io.File;
 
+import de.feuerwehraumuehle.feuerwehrapp.DEISApplication;
 import de.feuerwehraumuehle.feuerwehrapp.R;
-import de.feuerwehraumuehle.feuerwehrapp.manager.ConfigurationManager;
+import de.feuerwehraumuehle.feuerwehrapp.manager.GlobalConfigurationsManager;
 import de.feuerwehraumuehle.feuerwehrapp.model.Item;
 import de.feuerwehraumuehle.feuerwehrapp.model.ItemType;
 
@@ -23,27 +24,30 @@ import de.feuerwehraumuehle.feuerwehrapp.model.ItemType;
 
 public class MenuItemAdapter extends BaseAdapter {
 
-	private Context mContext;
-	private Item FDirectory;
+	private final String ICON_FOLDER_IMAGE_FILE_NAME = "icon_folder";
+	private final String ICON_PDF_IMAGE_FILE_NAME = "icon_pdf";
+	private final String ICON_LINK_IMAGE_FILE_NAME = "icon_link";
 
-	public MenuItemAdapter(Context c, Item FDirectory) {
+	private Context mContext;
+	private Item currentItem;
+
+	public MenuItemAdapter(Context c, Item currentItem) {
 		mContext = c;
-		this.FDirectory = FDirectory;
+		this.currentItem = currentItem;
 	}
 
 	public int getCount() {
-		return FDirectory.getChildren().size();
+		return currentItem.getChildren().size();
 	}
 
 	public Item getItem(int position) {
-		return FDirectory.getChildren().get(position);
+		return currentItem.getChildren().get(position);
 	}
 
 	public long getItemId(int position) {
 		return 0;
 	}
 
-	// create a new ImageView for each item referenced by the Adapter
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view;
 		if (convertView == null) {
@@ -56,42 +60,43 @@ public class MenuItemAdapter extends BaseAdapter {
 		View container = view.findViewById(R.id.category_container);
 		ImageView type = (ImageView) view.findViewById(R.id.category_type);
 		ImageView icon = (ImageView) view.findViewById(R.id.icon);
+
 		Item item = getItem(position);
 		name.setText(item.getDisplayName());
-
 		container.setBackgroundColor(item.getButtonColor());
 		name.setTextColor(item.getTextColor());
 
 		loadFolderImage(type, item);
-
-		loadImage(item.getIcon(), ConfigurationManager.globalDefaults.defaultIcon, icon);
+		loadImage(item.getIcon(), GlobalConfigurationsManager.globalDefaults.defaultIcon, icon);
 
 		return view;
 	}
 
 	private void loadFolderImage(ImageView type, Item item) {
 		if (item.getType() == ItemType.DIRECTORY) {
-			loadImage("icon_folder", "icon_folder", type);
+			loadImage(ICON_FOLDER_IMAGE_FILE_NAME, null, type);
 		} else if (item.getType() == ItemType.PDF) {
-			loadImage("icon_pdf", "icon_pdf", type);
+			loadImage(ICON_PDF_IMAGE_FILE_NAME, null, type);
 		} else if (item.getType() == ItemType.LINK) {
-			loadImage("icon_link", "icon_link", type);
+			loadImage(ICON_LINK_IMAGE_FILE_NAME, null, type);
 		}
 	}
 
-	private void loadImage(String iconName, String defaultIconName, ImageView view) {
-		File imgFile = new  File("/sdcard/feuerwehr/config/icons/" + iconName + ".png");
+	private void loadImage(String iconFileName, String defaultIconName, ImageView view) {
+		File imgFile = new  File(DEISApplication.getIconsPath(), iconFileName + ".png");
 		if(imgFile.exists()){
 			Bitmap loadedIcon = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 			view.setImageBitmap(loadedIcon);
-		} else {
-			imgFile = new  File("/sdcard/feuerwehr/config/icons/" + defaultIconName + ".png");
+		} else if (defaultIconName != null){
+			imgFile = new  File(DEISApplication.getIconsPath(), defaultIconName + ".png");
 			if(imgFile.exists()){
 				Bitmap loadedIcon = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 				view.setImageBitmap(loadedIcon);
 			} else {
 				view.setImageDrawable(null);
 			}
+		} else {
+			view.setImageDrawable(null);
 		}
 	}
 }

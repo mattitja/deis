@@ -5,12 +5,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -31,7 +29,7 @@ import org.androidannotations.annotations.ViewById;
 import java.io.File;
 import java.util.List;
 
-import de.feuerwehraumuehle.feuerwehrapp.manager.ConfigurationManager;
+import de.feuerwehraumuehle.feuerwehrapp.manager.GlobalConfigurationsManager;
 import de.feuerwehraumuehle.feuerwehrapp.helper.Utils;
 import de.feuerwehraumuehle.feuerwehrapp.view.CustomScrollHandle;
 
@@ -58,7 +56,7 @@ public class PDFnewActivity extends AppCompatActivity implements OnPageChangeLis
 	private void actionBarStyling() {
 		Utils.activateActionBarBackButton(getSupportActionBar(), true);
 		Utils.setActionBarBackgroundColor(getSupportActionBar(),
-				ConfigurationManager.globalDefaults.defaultMenuBackgroundColor);
+				GlobalConfigurationsManager.globalDefaults.defaultMenuBackgroundColor);
 	}
 
 	@Override

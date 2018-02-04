@@ -1,14 +1,11 @@
 package de.feuerwehraumuehle.feuerwehrapp.manager;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Environment;
 
-import org.xmlpull.v1.XmlPullParserException;
-
 import java.io.File;
-import java.io.IOException;
 
+import de.feuerwehraumuehle.feuerwehrapp.DEISApplication;
 import de.feuerwehraumuehle.feuerwehrapp.config.ColorMap;
 import de.feuerwehraumuehle.feuerwehrapp.config.GlobalDefaults;
 import de.feuerwehraumuehle.feuerwehrapp.config.parser.ColorParser;
@@ -18,16 +15,19 @@ import de.feuerwehraumuehle.feuerwehrapp.config.parser.DefaultsParser;
  * Created by Matze on 03.02.2018.
  */
 
-public class ConfigurationManager {
+public class GlobalConfigurationsManager {
 
-    private static ConfigurationManager instance;
+    private static GlobalConfigurationsManager instance;
 
-    public static ConfigurationManager getInstance() {
+    public static GlobalConfigurationsManager getInstance() {
         if (instance == null) {
-            instance = new ConfigurationManager();
+            instance = new GlobalConfigurationsManager();
         }
         return instance;
     }
+
+    private final static String PATH_COLORS = "colors.cfg";
+    private final static String PATH_DEFAULTS = "defaults.cfg";
 
     public static ColorMap colorMap;
     public static GlobalDefaults globalDefaults;
@@ -38,19 +38,15 @@ public class ConfigurationManager {
     }
 
     private void loadColors() throws Exception {
-        File colorsFile = new File(getSDCardPath(), "feuerwehr/config/colors.cfg");
+        File colorsFile = new File(DEISApplication.getConfigPath(), PATH_COLORS);
         ColorParser parser = new ColorParser();
         colorMap = parser.parse(colorsFile);
     }
 
     private void loadGlobalDefaults() throws Exception {
-        File colorsFile = new File(getSDCardPath(), "feuerwehr/config/defaults.cfg");
+        File colorsFile = new File(DEISApplication.getConfigPath(), PATH_DEFAULTS);
         DefaultsParser parser = new DefaultsParser();
         globalDefaults = parser.parse(colorsFile);
-    }
-
-    public static String getSDCardPath() {
-        return Environment.getExternalStorageDirectory().getAbsolutePath();
     }
 
     public static int getColorByColorSomething(String colorName) {

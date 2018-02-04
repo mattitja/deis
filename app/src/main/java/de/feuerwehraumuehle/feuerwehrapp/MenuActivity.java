@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import de.feuerwehraumuehle.feuerwehrapp.adapter.MenuItemAdapter;
 import de.feuerwehraumuehle.feuerwehrapp.helper.Utils;
-import de.feuerwehraumuehle.feuerwehrapp.manager.ConfigurationManager;
+import de.feuerwehraumuehle.feuerwehrapp.manager.GlobalConfigurationsManager;
 import de.feuerwehraumuehle.feuerwehrapp.manager.FileManager;
 import de.feuerwehraumuehle.feuerwehrapp.model.Item;
 import de.feuerwehraumuehle.feuerwehrapp.model.ItemType;
@@ -73,9 +73,9 @@ public class MenuActivity extends AppCompatActivity {
 		}
 		Utils.setStatusBarBlack(this);
 		Utils.setActionBarBackgroundColor(getSupportActionBar(),
-				ConfigurationManager.globalDefaults.defaultMenuBackgroundColor);
+				GlobalConfigurationsManager.globalDefaults.defaultMenuBackgroundColor);
 		View backgroundLayout = findViewById(R.id.background);
-		backgroundLayout.setBackgroundColor(ConfigurationManager.globalDefaults.defaultBackgroundColor);
+		backgroundLayout.setBackgroundColor(GlobalConfigurationsManager.globalDefaults.defaultBackgroundColor);
 
 	}
 

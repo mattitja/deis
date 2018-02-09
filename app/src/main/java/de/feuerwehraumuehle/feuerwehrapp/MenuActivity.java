@@ -66,9 +66,10 @@ public class MenuActivity extends AppCompatActivity {
 
 	private void activityStyling(String currentItemDisplayName) {
 		if (mainMenu) {
-			Utils.activateActionBarBackButton(getSupportActionBar(), true);
+			Utils.activateActionBarBackButton(getSupportActionBar(), false);
 			Utils.setActionBarTitle(getSupportActionBar(), "Hauptmenü");
 		} else {
+			Utils.activateActionBarBackButton(getSupportActionBar(), true);
 			Utils.setActionBarTitle(getSupportActionBar(), currentItemDisplayName);
 		}
 		Utils.setStatusBarBlack(this);

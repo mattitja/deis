@@ -24,18 +24,18 @@
             android:id="@+id/icon"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.40"
+            android:layout_weight="0.50"
             android:alpha="1"
             android:src="@drawable/logo_start"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.40"
+            android:layout_weight="0.30"
             android:ellipsize="end"
             android:textColor="@android:color/white"
             android:gravity="center"
-            android:text="Digitales.Einsatz\nInformations.System"
+            android:text="Digitales.Einsatz.Informations.System"
             android:textSize="30sp"/>
 
         <TextView

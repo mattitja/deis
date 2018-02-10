@@ -26,7 +26,7 @@ public class StartActivity extends AppCompatActivity {
 
 	public final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1337;
 
-	public final int START_SCREEN_DURATION = 1700;
+	public final int START_SCREEN_DURATION = 2000;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,22 +52,7 @@ public class StartActivity extends AppCompatActivity {
 	}
 
 	private void proceedWithGivenStoragePermission() {
-		loadActivityBackgroundImage();
 		loadAllData();
-	}
-
-	private void loadActivityBackgroundImage() {
-		ImageView imageView = (ImageView) findViewById(R.id.start_image);
-
-		int currentOrientation = getResources().getConfiguration().orientation;
-		String imageToShow = "";
-		if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
-			imageToShow = "start_portrait.jpg";
-		} else {
-			imageToShow = "start_landscape.jpg";
-		}
-
-		loadImage(imageToShow, imageView);
 	}
 
 	private void loadAllData() {
@@ -95,17 +80,6 @@ public class StartActivity extends AppCompatActivity {
 				finish();
 			}
 		}, START_SCREEN_DURATION);
-	}
-
-	private void loadImage(String iconName, ImageView view) {
-		File imgFile = new File("/sdcard/feuerwehr/config/icons/" + iconName);
-		if (imgFile.exists()) {
-			Bitmap loadedIcon = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-			view.setImageBitmap(loadedIcon);
-		} else {
-			View viewById = findViewById(R.id.empty_text);
-			viewById.setVisibility(View.VISIBLE);
-		}
 	}
 
 	@Override

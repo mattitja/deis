@@ -97,13 +97,37 @@ public class MenuActivity extends AppCompatActivity {
 				} else if (clickedItem.getType() == ItemType.PDF) {
 					startPDFActivity(clickedItem);
 				} else if ((clickedItem.getType() == ItemType.LINK)) {
-					openExternalApp(MenuActivity.this, ((Link) clickedItem).getPackageName());
+					startExternalActivity((Link) clickedItem);
 				} else {
 					Toast.makeText(getApplicationContext(), clickedItem.getType().toString(), Toast.LENGTH_SHORT).show();
 				}
 
 			}
 		});
+	}
+
+	private void startExternalActivity(Link clickedItem) {
+		if (checkIfExternalAppExists(clickedItem.getPackageName())) {
+			Intent intent = new Intent(MenuActivity.this, OpenExternalAppActivity.class);
+			intent.putExtra(OpenExternalAppActivity.INTENT_PACKAGE_NAME, clickedItem.getPackageName());
+			intent.putExtra(OpenExternalAppActivity.INTENT_APP_NAME, clickedItem.getDisplayName());
+			startActivity(intent);
+		}
+	}
+
+	public boolean checkIfExternalAppExists(String packageName) {
+		PackageManager manager = getPackageManager();
+		try {
+			Intent intentToExternal = manager.getLaunchIntentForPackage(packageName);
+			if (intentToExternal == null) {
+				throw new ActivityNotFoundException();
+			}
+			return true;
+		} catch (ActivityNotFoundException e) {
+			String messageAppNotFound = "App mit dem Package-Namen \"" + packageName + "\" nicht gefunden.";
+			Toast.makeText(getApplicationContext(), messageAppNotFound, Toast.LENGTH_SHORT).show();
+		}
+		return false;
 	}
 
 	private void startMenuActivityDeeper(ArrayList<Integer> numericPathToNextItem) {
@@ -121,20 +145,7 @@ public class MenuActivity extends AppCompatActivity {
 		startActivity(intent);
 	}
 
-	public void openExternalApp(Context context, String packageName) {
-		PackageManager manager = context.getPackageManager();
-		try {
-			Intent intentToExternal = manager.getLaunchIntentForPackage(packageName);
-			if (intentToExternal == null) {
-				throw new ActivityNotFoundException();
-			}
-			intentToExternal.addCategory(Intent.CATEGORY_LAUNCHER);
-			context.startActivity(intentToExternal);
-		} catch (ActivityNotFoundException e) {
-			String messageAppNotFound = "App mit dem Package-Namen \"" + packageName + "\" nicht gefunden.";
-			Toast.makeText(getApplicationContext(), messageAppNotFound, Toast.LENGTH_SHORT).show();
-		}
-	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

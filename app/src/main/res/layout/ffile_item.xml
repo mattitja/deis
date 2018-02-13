@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<de.feuerwehraumuehle.feuerwehrapp.view.SquareView android:id="@+id/category_container"
-                                                   xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
+<de.miroit.deis.view.SquareView android:id="@+id/category_container"
+                                xmlns:android="http://schemas.android.com/apk/res/android"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/category_type"
@@ -46,4 +46,4 @@
             android:textSize="20sp"/>
 
     </LinearLayout>
-</de.feuerwehraumuehle.feuerwehrapp.view.SquareView>
+</de.miroit.deis.view.SquareView>

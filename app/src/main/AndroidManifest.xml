@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="de.feuerwehraumuehle.feuerwehrapp"
+<manifest package="de.miroit.deis"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
-        android:name=".DEISApplication"
+        android:name="de.miroit.deis.DEISApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ff_b"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MenuActivity"
+            android:name="de.miroit.deis.MenuActivity"
             android:theme="@style/AppTheme.ActionBar"/>
         <activity
-            android:name=".ErrorActivity"
+            android:name="de.miroit.deis.ErrorActivity"
             android:theme="@style/AppTheme.StartScreen"/>
         <activity
-            android:name=".PDFnewActivity_"
+            android:name="de.miroit.deis.PDFnewActivity_"
             android:theme="@style/AppTheme.ActionBar"/>
         <activity
-            android:name=".StartActivity"
+            android:name="de.miroit.deis.StartActivity"
             android:theme="@style/AppTheme.StartScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -29,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ImpressActivity"
+        <activity android:name="de.miroit.deis.ImpressActivity"
                   android:theme="@style/AppTheme.ActionBar">
         </activity>
     </application>

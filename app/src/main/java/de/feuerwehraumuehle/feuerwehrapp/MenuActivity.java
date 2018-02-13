@@ -77,7 +77,6 @@ public class MenuActivity extends AppCompatActivity {
 				GlobalConfigurationsManager.globalDefaults.defaultMenuBackgroundColor);
 		View backgroundLayout = findViewById(R.id.background);
 		backgroundLayout.setBackgroundColor(GlobalConfigurationsManager.globalDefaults.defaultBackgroundColor);
-
 	}
 
 	private void buildMenuView(ArrayList<Integer> numericPathToCurrentItem, final Item currentRootItem) {
@@ -140,9 +139,14 @@ public class MenuActivity extends AppCompatActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu, menu);
-		MenuItem item = menu.findItem(R.id.root);
+		MenuItem mainMenuItem = menu.findItem(R.id.root);
+		MenuItem impressItem = menu.findItem(R.id.impress);
 		if (mainMenu) {
-			item.setVisible(false);
+			mainMenuItem.setVisible(false);
+			impressItem.setVisible(true);
+		} else {
+			mainMenuItem.setVisible(true);
+			impressItem.setVisible(false);
 		}
 		return true;
 	}
@@ -154,6 +158,9 @@ public class MenuActivity extends AppCompatActivity {
 		} else if (item.getItemId() == R.id.root) {
 			Intent intent = new Intent(MenuActivity.this, MenuActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+			startActivity(intent);
+		} else if (item.getItemId() == R.id.impress) {
+			Intent intent = new Intent(MenuActivity.this, ImpressActivity.class);
 			startActivity(intent);
 		}
 		return true;

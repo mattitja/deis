@@ -10,7 +10,6 @@ import java.util.HashMap;
 import de.feuerwehraumuehle.feuerwehrapp.DEISApplication;
 import de.feuerwehraumuehle.feuerwehrapp.config.ItemConfiguration;
 import de.feuerwehraumuehle.feuerwehrapp.config.parser.ItemParser;
-import de.feuerwehraumuehle.feuerwehrapp.exceptions.SeriousConfigurationIssueException;
 import de.feuerwehraumuehle.feuerwehrapp.model.Item;
 import de.feuerwehraumuehle.feuerwehrapp.model.ItemType;
 import de.feuerwehraumuehle.feuerwehrapp.model.Link;
@@ -33,15 +32,8 @@ public class FileManager {
     private Item rootItem;
 
     public void init() throws Exception {
+        DEISApplication.checkIfFolderExistsAndContainsSomething(DEISApplication.getDataPath());
         File dataDirectory = new File(DEISApplication.getDataPath());
-        if (!dataDirectory.exists() || !dataDirectory.isDirectory()) {
-            String msg = "Der Ordner " + DEISApplication.getDataPath() + " existiert nicht.";
-            throw new SeriousConfigurationIssueException(msg);
-        } else if(dataDirectory.listFiles().length == 0) {
-            String msg = "Der Ordner " + DEISApplication.getDataPath() + " beinhaltet nichts.";
-            throw new SeriousConfigurationIssueException(msg);
-        }
-
         rootItem = new Item();
         scanDirectory(dataDirectory, rootItem);
     }

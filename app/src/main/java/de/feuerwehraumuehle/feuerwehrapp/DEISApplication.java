@@ -3,13 +3,17 @@ package de.feuerwehraumuehle.feuerwehrapp;
 import android.app.Application;
 import android.os.Environment;
 
+import java.io.File;
+
+import de.feuerwehraumuehle.feuerwehrapp.exceptions.SeriousConfigurationIssueException;
+
 /**
  * Created by mmi on 04.02.2018.
  */
 
 public class DEISApplication extends Application {
 
-	private static final String rootFolder = "/feuerwehr";
+	private static final String rootFolder = "/deis";
 
 	private static final String dataRelativeFolder = rootFolder + "/data";
 	private static final String configRelativeFolder = rootFolder + "/config";
@@ -23,6 +27,10 @@ public class DEISApplication extends Application {
 		sdcardPath = Environment.getExternalStorageDirectory().getAbsolutePath();
 	}
 
+	public static String getRootPath() {
+		return sdcardPath + rootFolder;
+	}
+
 	public static String getDataPath() {
 		return sdcardPath + dataRelativeFolder;
 	}
@@ -33,5 +41,17 @@ public class DEISApplication extends Application {
 
 	public static String getIconsPath() {
 		return sdcardPath + iconsRelativeFolder;
+	}
+
+	public static void checkIfFolderExistsAndContainsSomething(String path) throws
+			SeriousConfigurationIssueException {
+		File pathDirectory = new File(path);
+		if (!pathDirectory.exists() || !pathDirectory.isDirectory()) {
+			String msg = "Der Ordner " + DEISApplication.getDataPath() + " existiert nicht.";
+			throw new SeriousConfigurationIssueException(msg);
+		} else if (pathDirectory.listFiles().length == 0) {
+			String msg = "Der Ordner " + DEISApplication.getDataPath() + " beinhaltet nichts.";
+			throw new SeriousConfigurationIssueException(msg);
+		}
 	}
 }

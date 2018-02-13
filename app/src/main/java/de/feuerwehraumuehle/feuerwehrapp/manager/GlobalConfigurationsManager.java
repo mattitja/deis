@@ -1,7 +1,6 @@
 package de.feuerwehraumuehle.feuerwehrapp.manager;
 
 import android.graphics.Color;
-import android.os.Environment;
 
 import java.io.File;
 
@@ -33,6 +32,8 @@ public class GlobalConfigurationsManager {
     public static GlobalDefaults globalDefaults;
 
     public void init() throws Exception {
+        DEISApplication.checkIfFolderExistsAndContainsSomething(DEISApplication.getRootPath());
+        DEISApplication.checkIfFolderExistsAndContainsSomething(DEISApplication.getConfigPath());
         loadColors();
         loadGlobalDefaults();
     }

@@ -39,7 +39,7 @@ public class ErrorActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_empty);
+		setContentView(R.layout.activity_error);
 		Utils.setStatusBarBlack(this);
 
 		String headline = getIntent().getStringExtra(INTENT_MESSAGE);

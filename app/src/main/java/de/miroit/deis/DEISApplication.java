@@ -47,10 +47,10 @@ public class DEISApplication extends Application {
 			SeriousConfigurationIssueException {
 		File pathDirectory = new File(path);
 		if (!pathDirectory.exists() || !pathDirectory.isDirectory()) {
-			String msg = "Der Ordner " + DEISApplication.getDataPath() + " existiert nicht.";
+			String msg = "Der Ordner " + path + " existiert nicht.";
 			throw new SeriousConfigurationIssueException(msg);
 		} else if (pathDirectory.listFiles().length == 0) {
-			String msg = "Der Ordner " + DEISApplication.getDataPath() + " beinhaltet nichts.";
+			String msg = "Der Ordner " + path + " beinhaltet nichts.";
 			throw new SeriousConfigurationIssueException(msg);
 		}
 	}

@@ -26,7 +26,7 @@
             android:layout_height="0dp"
             android:layout_weight="0.40"
             android:alpha="1"
-            android:src="@drawable/logo_start"/>
+            android:src="@drawable/deis_logo_512_32"/>
 
         <TextView
             android:layout_width="match_parent"

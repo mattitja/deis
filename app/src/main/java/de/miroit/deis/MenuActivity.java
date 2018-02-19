@@ -1,7 +1,6 @@
 package de.miroit.deis;
 
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -167,13 +166,23 @@ public class MenuActivity extends AppCompatActivity {
 		if (item.getItemId() == android.R.id.home) {
 			finish();
 		} else if (item.getItemId() == R.id.root) {
-			Intent intent = new Intent(MenuActivity.this, MenuActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-			startActivity(intent);
+			BackToHomeActivity.askIfWeShouldGoBackToHome(this);
 		} else if (item.getItemId() == R.id.impress) {
 			Intent intent = new Intent(MenuActivity.this, ImpressActivity.class);
 			startActivity(intent);
 		}
 		return true;
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == BackToHomeActivity.WOULD_WE_GO_BACK_TO_HOME) {
+			if (resultCode == BackToHomeActivity.USER_SAID_YES) {
+				Intent intent = new Intent(MenuActivity.this, MenuActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+				startActivity(intent);
+			}
+		}
 	}
 }

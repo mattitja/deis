@@ -33,8 +33,13 @@
             android:name=".ImpressActivity"
             android:theme="@style/AppTheme.ActionBar">
         </activity>
-        <activity android:name=".OpenExternalAppActivity"
-                  android:theme="@style/AppTheme.ActionBar">
+        <activity
+            android:name=".OpenExternalAppActivity"
+            android:theme="@style/AppTheme.ActionBar">
+        </activity>
+        <activity
+            android:name=".BackToHomeActivity"
+            android:theme="@style/AppTheme.ActionBar">
         </activity>
     </application>
 

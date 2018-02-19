@@ -237,15 +237,23 @@ public class PDFnewActivity extends AppCompatActivity implements OnPageChangeLis
 			finish();
 			return true;
 		} else if (item.getItemId() == R.id.root) {
-			Intent intent = new Intent(PDFnewActivity.this, MenuActivity.class);
-
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-			startActivity(intent);
+			BackToHomeActivity.askIfWeShouldGoBackToHome(this);
 		} else if(item.getItemId() == R.id.scrolltop) {
 			pdfView.jumpTo(0);
 		}
 		return false;
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == BackToHomeActivity.WOULD_WE_GO_BACK_TO_HOME) {
+			if (resultCode == BackToHomeActivity.USER_SAID_YES) {
+				Intent intent = new Intent(this, MenuActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+				startActivity(intent);
+			}
+		}
 	}
 
 }

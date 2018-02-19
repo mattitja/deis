@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.miroit.deis.OpenExternalAppActivity">
+    tools:context="de.miroit.deis.BackToHomeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_weight="0.30"
             android:ellipsize="end"
             android:gravity="center"
-            android:text="Externe App APPNAME starten?"
+            android:text="Zurück ins Hauptmenü?"
             android:textColor="@android:color/white"
             android:textSize="30sp"/>
 
@@ -41,7 +41,7 @@
             android:background="#8BC34A"
             android:ellipsize="end"
             android:gravity="center"
-            android:text="FORTFAHREN"
+            android:text="JA"
             android:textColor="@android:color/white"
             android:textSize="30sp"/>
 
@@ -60,7 +60,7 @@
             android:background="#F44336"
             android:ellipsize="end"
             android:gravity="center"
-            android:text="ABBRECHEN"
+            android:text="NEIN"
             android:textColor="@android:color/white"
             android:textSize="30sp"/>
 

@@ -78,16 +78,14 @@ public class MenuActivity extends AppCompatActivity {
 		backgroundLayout.setBackgroundColor(GlobalConfigurationsManager.globalDefaults.defaultBackgroundColor);
 	}
 
-	private void buildMenuView(ArrayList<Integer> numericPathToCurrentItem, final Item currentRootItem) {
-		final ArrayList<Integer> numericPathToNextItem = new ArrayList<>(numericPathToCurrentItem);
-
+	private void buildMenuView(final ArrayList<Integer> numericPathToCurrentItem, final Item currentRootItem) {
 		MenuItemAdapter adapter = new MenuItemAdapter(this, currentRootItem);
 		GridView gridView = (GridView) findViewById(R.id.gridview);
 		gridView.setAdapter(adapter);
 		gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+				final ArrayList<Integer> numericPathToNextItem = new ArrayList<>(numericPathToCurrentItem);
 				Item clickedItem = currentRootItem.getChildren().get(position);
 				if (clickedItem.getType() == ItemType.DIRECTORY) {
 					numericPathToNextItem.add(position);

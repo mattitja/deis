@@ -46,7 +46,7 @@
             android:ellipsize="end"
             android:textColor="@android:color/white"
             android:gravity="center"
-            android:text="Version 1.10\n© miroit.de "
+            android:text="Version 1.11\n© miroit.de "
             android:textSize="12sp"/>
 
     </LinearLayout>

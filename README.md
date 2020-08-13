@@ -93,7 +93,7 @@ Wie schon angedeutet, verwendet DEIS das Prinzip der Vererbung. Die Werte in der
 ### Icons
 Jede Schaltfläche kann mit einem individuellen Icon versehen werden. Die Icons müssen im .png-Format im Ordner `config/icons` abgelegt werden und können dann aus den Konfigurationsdateien mit dem Dateinamen ohne Endung referenziert werden. Dies sieht so aus:
 
-```
+```xml
 <item>
   <icon>notausgang</icon>
   …
@@ -158,7 +158,7 @@ Eine Schaltfläche besteht aus folgenden Komponenten:
 
 Dies würde man in der `Rettungskarten.cfg` so realisieren:
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
   <item>
     <displayName>Rettungskarten</displayName>

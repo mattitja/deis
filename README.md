@@ -5,7 +5,7 @@
 Um die vielseitigen Einsätze der Feuerwehr zu unterstützen, existiert die im folgenden beschriebene Tablet-App 
 `DEIS - Digitales Einsatz-InformationsSystem`. 
 
-Sie ist ein auf den Feuerwehreinsatz optimierter File-Manager, der auf die individuellen Anforderungen jeder Feuerwehr angepasst werden kann
+Sie ist ein auf den Feuerwehreinsatz optimierter File-Manager, der auf die individuellen Anforderungen jeder Feuerwehr angepasst werden kann.
 
 ## Rettungskarten für den Feuerwehreinsatz
 

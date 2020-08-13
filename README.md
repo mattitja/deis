@@ -56,12 +56,13 @@ Zunächst wird das Tablet per USB-Kabel an einen Rechner angeschlossen. Nun kann
 
 `adb install deis.apk`
 
-ausgeführt. Die App installiert sich nun auf dem Gerät. Nach erfolgreicher Installation öffnet sich die App und fragt den Benutzer nach der Berechtigung, auf den Telefonspeicher zugreifen zu dürfen. Dies sollte mit “Ja” beantwortet werden.
+ausgeführt. Die App installiert sich nun auf dem Gerät. Nach erfolgreicher Installation öffnet sich die App und fragt den Benutzer nach der Berechtigung, auf den Telefonspeicher zugreifen zu dürfen. Dies sollte mit 
+Ja” beantwortet werden.
 
 Die App meldet nun, dass sie keine passende Ordnerstruktur im Telefonspeicher finden kann und fordert den Nutzer auf, die entsprechende Ordnerstruktur anzulegen. Der Nutzer nimmt nun das der APK beiliegende .zip-Archiv und entpackt es auf dem Rechner. Darin befindet sich ein Ordner `deis`, der wiederum zwei Unterordner hat: `data` und `config`
 
 ### Nutzdaten
-Der Nutzer legt die Daten, die er als Nutzdaten auf dem Tablet verwenden möchte, im Ordner “data” ab. Diese sind beispielsweise Rettungskarten in pdf-Format (siehe Abb.1) oder neue Ordner Er kann dabei beliebig viele verschachtelte Unterordner einrichten und PDFs einkopieren. Jeder (Unter-)Ordner wird in der App intuitiv als eine Menüebene dargestellt.
+Der Nutzer legt die Daten, die er als Nutzdaten auf dem Tablet verwenden möchte, im Ordner `data` ab. Diese sind beispielsweise Rettungskarten in pdf-Format (siehe Abb.1) oder neue Ordner Er kann dabei beliebig viele verschachtelte Unterordner einrichten und PDFs einkopieren. Jeder (Unter-)Ordner wird in der App intuitiv als eine Menüebene dargestellt.
 
 ![Rettungskarte eines Audis](https://i.imgur.com/v66pB8g.png)
 
@@ -77,7 +78,7 @@ Des Weiteren kann so an einer zentralen Stelle eine Farbe geändert werden, die 
 In der `defaults.cfg` werden Standard-Einstellungen für die App getroffen, die teilweise von dateispezifischen Konfigurationsdateien überschrieben werden können, aber nicht müssen. So müssen hier Farbwerte (als HEX oder Alias) für Schaltflächenfarben, Textfarben und Schaltflächen-Icons definiert werden. Diese Werte können später überschrieben werden. Des Weiteren werden hier aber auch die Hintergrundfarben für die Menüleiste und den allgemeinen Hintergrund festgelegt. Diese Datei muss existieren und gültige Werte enthalten, da sie als „Fallback“ genutzt werden, falls keine dateispezifische Konfiguration vorliegt.
 
 #### datei_abc.cfg
-Dateispezifische Konfigurationsdateien werden nicht im Ordner “config” abgelegt, sondern direkt in die Nutzdatenstruktur “data” selbst, damit die Konfiguration von einzelnen Dateien möglichst intuitiv ist. Eine Datei (ein Ordner, ein PDF oder ein App-Link) zieht dann eine Konfiguration an, wenn eine Datei mit dem exakt gleichen Namen existiert, nur als Endung .cfg besitzt.
+Dateispezifische Konfigurationsdateien werden nicht im Ordner `config` abgelegt, sondern direkt in die Nutzdatenstruktur `data` selbst, damit die Konfiguration von einzelnen Dateien möglichst intuitiv ist. Eine Datei (ein Ordner, ein PDF oder ein App-Link) zieht dann eine Konfiguration an, wenn eine Datei mit dem exakt gleichen Namen existiert, nur als Endung .cfg besitzt.
 
 *Beispiel: `HydrantenkarteHamburg2018.pdf` wird konfiguriert durch die Datei `HydrantenkarteHamburg2018.cfg`.*
 
@@ -105,8 +106,8 @@ Beispiel für einen Link der auf Google Maps verweist:
 
 `z...com.google.android.apps.maps.link`
 
-Dabei ist „z“ ein beliebig langer String, der einfach nur dazu dient, die Möglichkeit zu bieten, die Schaltfläche in eine alphabetische Reihenfolge innerhalb des Ordners zu bringen.
-Der Marker “…” markiert den Anfang des Package-Namens. Die Endung “.link” markiert das Ende des Package-Namens.
+Dabei ist `z` ein beliebig langer String, der einfach nur dazu dient, die Möglichkeit zu bieten, die Schaltfläche in eine alphabetische Reihenfolge innerhalb des Ordners zu bringen.
+Der Marker `...` markiert den Anfang des Package-Namens. Die Endung `.link` markiert das Ende des Package-Namens.
 Selbstverständlich kann auch für eine `.link`-Datei eine `.cfg`-Datei angelegt werden, die das Aussehen der Schaltfäche bestimmt.
 
 ### Reihenfolge von Elementen einer Menüebene
@@ -213,9 +214,9 @@ Wird die unterste MenuActivity beendet, beendet sich die App, ansonsten wird nur
 Die Klasse DEISApplication erbt von der Android Application Klasse und wird initiiert, sobald die App gestartet wird. In dieser Klasse sind die Pfade hinterlegt, auf die die App auf der SD-Karte zugreifen soll. Sie dient als zentrale Informationsquelle für Klassen wie bspw. den File Manager.
 
 ### File Manager
-Um auf die “data”-Dateien im File-System zugreifen zu können, wurde ein Klasse FileManager geschrieben. Diese Klasse wird wie beschrieben in der StartActivity initiiert und zum Laden der “Data”-Ordnerstruktur angestoßen. Konkret übersetzt sie die Data-Files im Filesystem in sogenannte “Items”. Das Laden erfolgt folgendermaßen:
+Um auf die `data`-Dateien im File-System zugreifen zu können, wurde ein Klasse FileManager geschrieben. Diese Klasse wird wie beschrieben in der StartActivity initiiert und zum Laden der `data`-Ordnerstruktur angestoßen. Konkret übersetzt sie die Data-Files im Filesystem in sogenannte `Items`. Das Laden erfolgt folgendermaßen:
 
-zunächst werden alle Konfigurationsdateien (`.cfg`) aus dem `data` Verzeichnis geladen. Diese Files werden im ItemParser, der das XML in ein Java-POJO (namens `ItemConfiguration`) überträgt, geparst. Alle ItemConfigurations werden zunächst in einer Hashmap im Speicher gehalten, dann werden alle restlichen Dateien aus dem “data”-Ordner geladen und es wird versucht, für jedes `Item` eine passende `ItemConfiguration` in der HashMap zu finden. Falls das gelingt, werden die Werte wie `textColor` oder `buttonColor` in das `Item` übertragen. Falls nicht, wird auf die Standardwerte zurückgegriffen.
+zunächst werden alle Konfigurationsdateien (`.cfg`) aus dem `data` Verzeichnis geladen. Diese Files werden im ItemParser, der das XML in ein Java-POJO (namens `ItemConfiguration`) überträgt, geparst. Alle ItemConfigurations werden zunächst in einer Hashmap im Speicher gehalten, dann werden alle restlichen Dateien aus dem `data`-Ordner geladen und es wird versucht, für jedes `Item` eine passende `ItemConfiguration` in der HashMap zu finden. Falls das gelingt, werden die Werte wie `textColor` oder `buttonColor` in das `Item` übertragen. Falls nicht, wird auf die Standardwerte zurückgegriffen.
 
 ### GlobalConfigurationManager
 Dieser Manager geht ähnlich wie der FileManager vor, nur liest er nur zwei konkrete Dateien ein: Die `colors.cfg` und die `defaults.cfg`. Er parst beide Dateien und hält sie als static-Variablen im Speicher. Zugleich ist der Manager ein Singleton und ermöglicht damit den Zugriff von überall aus allen anderen Klassen der App.

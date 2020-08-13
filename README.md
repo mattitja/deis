@@ -15,6 +15,7 @@ In der Praxis stellt sich aber heraus, dass bisher kein solcher File Manager exi
 DEIS ist auf jeden Einsatz speziell ausgelegt, d.h. es kann innerhalb von Sekunden die jeweils richtigen Dokumente bereitstellen. Dies funktioniert durch eine einfache, übersichtliche und unmissverständliche Oberfläche, mit großen Schaltflächen (die auch im Eifer des Gefechts unfehlbar sind), klarer Schrift, starker Kontraste und ohne Schnörkeleien, die nur zu Platzverschwendung und Ablenkung führen würden. Die Menüführung ist einfach und intuitiv. Die App kann sich nicht aus Versehen schließen (dies wäre im Ernstfall fatal) und enthält keine Medienbrüche (wie Sprünge von File Manager in PDF Viewer). Sie ist robust und darf keine unerwarteten Zustände einnehmen.
 
 Ein weiterer wichtiger Punkt ist die offline-Fähigkeit der App. Diese ist von äußerster Notwendigkeit, da es immer noch in vielen Teilen des Landes kein ausreichend gutes bis gar kein Netz gibt, wie zum Beispiel in Wäldern oder unterirdisch in Kanalsystemen.
+
 Die App ist außerdem durch die Ordner- und Dokumentenstruktur individuell anpassbar und durch die Konfigurationsdateien können sehr einfach Layout und Funktion verändert werden. So können sind beispielsweise auch sehr simpel neue Schaltflächen erstellt werden.
 Die Anpassungen können (außerhalb des Einsatzes natürlich) schnell durchgeführt werden und so ist die App immer an die Bedürfnisse der jeweiligen Feuerwehr abgestimmt.
 
@@ -31,23 +32,25 @@ Zunächst wird das Tablet per USB-Kabel an einen Rechner angeschlossen. Nun kann
 adb install deis.apk
 
 ausgeführt. Die App installiert sich nun auf dem Gerät. Nach erfolgreicher Installation öffnet sich die App und fragt den Benutzer nach der Berechtigung, auf den Telefonspeicher zugreifen zu dürfen. Dies sollte mit “Ja” beantwortet werden.
+
 Die App meldet nun, dass sie keine passende Ordnerstruktur im Telefonspeicher finden kann und fordert den Nutzer auf, die entsprechende Ordnerstruktur anzulegen. Der Nutzer nimmt nun das der APK beiliegende .zip-Archiv und entpackt es auf dem Rechner. Darin befindet sich ein Ordner “deis”, der wiederum zwei Unterordner hat: “data” und “config”
 
 ### Nutzdaten
 Der Nutzer legt die Daten, die er als Nutzdaten auf dem Tablet verwenden möchte, im Ordner “data” ab. Diese sind beispielsweise Rettungskarten in pdf-Format (siehe Abb.1) oder neue Ordner Er kann dabei beliebig viele verschachtelte Unterordner einrichten und PDFs einkopieren. Jeder (Unter-)Ordner wird in der App intuitiv als eine Menüebene dargestellt.
 
-![GitHub Logo](https://i.imgur.com/v66pB8g.png)
-Format: ![Rettungskarte eines Audis](url)
+![Rettungskarte eines Audis](https://i.imgur.com/v66pB8g.png)
 
 ### Konfigurationsdateien
 Zunächst wird unterschieden zwischen globalen und dateispezifischen Konfigurationsdateien. Im Ordner “config” liegen die beiden globalen XML-Dateien “colors.cfg” und “defaults.cfg”. 
 
 ##### colors.cfg
 In der Datei „colors.cfg“ können Farbwerte in Form von HEX-Werten abgespeichert werden und zugehörige Alias vergeben werden. Das dient dazu, dass ein festes Farbenset für eine App definiert werden kann, welches dann in allen anderen Konfigurationsdateien verwendet werden kann, ohne dass sich der genaue HEX-Wert gemerkt werden muss (aus #FFFFFF wird z.B. white). 
+
 Des Weiteren kann so an einer zentralen Stelle eine Farbe geändert werden, die dann Auswirkungen auf alle Elemente der App hat, die diese Farbe referenzieren. 
 
 #### default.cfg
 In der „defaults.cfg“ werden Standard-Einstellungen für die App getroffen, die teilweise von dateispezifischen Konfigurationsdateien überschrieben werden können, aber nicht müssen. So müssen hier Farbwerte (als HEX oder Alias) für Schaltflächenfarben, Textfarben und Schaltflächen-Icons definiert werden. Diese Werte können später überschrieben werden. Des Weiteren werden hier aber auch die Hintergrundfarben für die Menüleiste und den allgemeinen Hintergrund festgelegt. Diese Datei muss existieren und gültige Werte enthalten, da sie als „Fallback“ genutzt werden, falls keine dateispezifische Konfiguration vorliegt.
+
 #### datei_abc.cfg
 Dateispezifische Konfigurationsdateien werden nicht im Ordner “config” abgelegt, sondern direkt in die Nutzdatenstruktur “data” selbst, damit die Konfiguration von einzelnen Dateien möglichst intuitiv ist. Eine Datei (ein Ordner, ein PDF oder ein App-Link) zieht dann eine Konfiguration an, wenn eine Datei mit dem exakt gleichen Namen existiert, nur als Endung .cfg besitzt.
 
@@ -55,64 +58,50 @@ Beispiel: “HydrantenkarteHamburg2018.pdf” wird konfiguriert durch die Datei 
 
 Der Aufbau dieser Konfigurationsdatei ähnelt dem der “defaults.cfg”. Hier können die Schaltflächenfarbe, die Textfarbe und das Icon der Schaltfläche individuell für jede Datei angepasst werden. Zusätzlich kann ein „displayName” vergeben werden. Der „displayName“ gibt an, unter welchem Namen die Datei angezeigt werden soll. Dies dient dem Zweck, dass man die Dateinamen oftmals anders nennen möchte, als die Anzeigenamen, zum Beispiel ohne Leerzeichen und mit Datum im Dateinamen. In der App wird - falls ein „displayName” vergeben wurde - nur dieser angezeigt.
 
-2.1.3.4 Vererbung
+#### Vererbung
 Wie schon angedeutet, verwendet DEIS das Prinzip der Vererbung. Die Werte in der defaults.cfg müssen angelegt werden, sodass sie als Fallback genutzt werden können. Alle dateispezifischen Konfigurationen sind lediglich optional und können die Defaults überschreiben. Hier können einzelne Attribute (wie beispielsweise nur die Textfarbe) überschrieben werden, während andere Attribute nicht überschrieben werden. Es ist auch möglich, keine dateispezifische Konfigurationsdatei anzulegen. In diesem Fall werden für das Element nur die default-Werte beachtet.
 
-2.1.4 Icons
+### Icons
 Jede Schaltfläche kann mit einem individuellen Icon versehen werden. Die Icons müssen im .png-Format im Ordner “config/icons” abgelegt werden und können dann aus den Konfigurationsdateien mit dem Dateinamen ohne Endung referenziert werden. Dies sieht so aus:
 
-<item>
-<icon>notausgang</icon>
-…
-</item>
+`<item>
+  <icon>notausgang</icon>
+  …
+</item>`
 
 Hier wird die Datei “config/icons/notausgang.png” referenziert. Das Format PNG wird verwendet, damit Transparenzen möglich sind.
 
-2.1.5 Link-Dateien
+### Link-Dateien
 Ein weiteres Feature von DEIS ist, andere auf dem Gerät befindliche Apps öffnen zu können, ohne dass es sich so anfühlt, als würde der Nutzer die App verlassen.
 Dazu muss eine leere Datei angelegt werden, die im Dateinamen den Package-Namen der zu öffnenden Datei beinhaltet. Der Package-Name einer Datei kann im Google-Play-Store herausgefunden werden.
 Beispiel für einen Link der auf Google Maps verweist:
 
-z...com.google.android.apps.maps.link
+`z...com.google.android.apps.maps.link`
 
 Dabei ist „z“ ein beliebig langer String, der einfach nur dazu dient, die Möglichkeit zu bieten, die Schaltfläche in eine alphabetische Reihenfolge innerhalb des Ordners zu bringen.
 Der Marker “…” markiert den Anfang des Package-Namens. Die Endung “.link” markiert das Ende des Package-Namens.
 Selbstverständlich kann auch für eine “.link”-Datei eine “.cfg”-Datei angelegt werden, die das Aussehen der Schaltfäche bestimmt.
 
-2.1.6 Reihenfolge von Elementen einer Menüebene
+### Reihenfolge von Elementen einer Menüebene
 Wie bereits angedeutet, werden die Elemente einer Menüebene alphabetisch sortiert. Das bezieht sich aber ausschließlich auf die Dateinamen und nicht auf die Anzeige-Namen. Somit ist es möglich mit Zahlen oder Buchstaben die Elemente in eine beliebige Reihenfolge zu bringen (zum Beispiel: 0_hydranten.pdf, 1_kanäle.pdf) und gleichzeitig die anzuzeigenden Namen nicht zu verfälschen.
 
-2.1.7 Übertragung auf das Tablet
+### Übertragung auf das Tablet
 Wenn die Ordnerstruktur “/deis” wie gewünscht angepasst wurde, kann der Ordner auf das Rootverzeichnis der SD-Karte des Tablets kopiert werden. Dazu muss in der Kommandozeile im Elternordner von “deis” folgender Befehl eingegeben werden:
 
-adb push /deis /sdcard/
+`adb push /deis /sdcard/`
 
 Der gesamte Ordner wird nun übertragen. Alternativ kann das Tablet (unter Windows) im Datei-Explorer unter “Computer” angewählt und geöffnet werden. Dann kann per Drag and Drop der Ordner übertragen werden. Wichtig dabei ist, dass der Ordner sich im Root-Verzeichnis der SD-Karte befindet. (Hinweis: Jedes Android-Telefon hat den Ordner /sdcard/, auch wenn das Gerät gar keinen SD-Karten-Slot besitzt!)
 
-2.1.8 Aktualisieren der Ordnerstruktur
+### Aktualisieren der Ordnerstruktur
 Wenn irgendwelche Änderungen an der Ordnerstruktur vorgenommen werden und die App bereits läuft, muss sie, bevor die Änderungen übernommen werden, einmal hart beendet und wieder neugestartet werden. Denn erst beim App-Start wird die Ordnerstruktur komplett neu eingeladen.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-2.2 Einsatzphase
+## Einsatzphase
 Das Tablet ist nun für den Einsatz konfiguriert. Dieses Kapitel beschreibt die Benutzung der fertig konfigurierten App.
 
-Nach Öffnen der App erscheint ein 2-Sekündiger Start-Screen, der das Logo von DEIS trägt, sowie den Namen der App und die Entwickler-Copyrights (siehe Abb. 2)
+Nach Öffnen der App erscheint ein 2-Sekündiger Start-Screen, der das Logo von DEIS trägt, sowie den Namen der App und die Entwickler-Copyrights.
 
-
-Abb. 2: Startscreen
+!(https://i.imgur.com/joqxjsE.png)
 
 Anschließend öffnet sich die Schaltflächenübersicht der untersten Menüebene. Die zuvor konfigurierten Buttons sind nun hier zu sehen, mit zugehörigen dahinterliegenden Ordnern, Dokumenten und Links (siehe Abb. 3).
 

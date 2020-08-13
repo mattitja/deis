@@ -42,7 +42,7 @@ Abb.: 1 Rettungskarte eines Audis
 ### Konfigurationsdateien
 Zunächst wird unterschieden zwischen globalen und dateispezifischen Konfigurationsdateien. Im Ordner “config” liegen die beiden globalen XML-Dateien “colors.cfg” und “defaults.cfg”. 
 
-2.1.3.1 colors.cfg
+##### colors.cfg
 In der Datei „colors.cfg“ können Farbwerte in Form von HEX-Werten abgespeichert werden und zugehörige Alias vergeben werden. Das dient dazu, dass ein festes Farbenset für eine App definiert werden kann, welches dann in allen anderen Konfigurationsdateien verwendet werden kann, ohne dass sich der genaue HEX-Wert gemerkt werden muss (aus #FFFFFF wird z.B. white). 
 Des Weiteren kann so an einer zentralen Stelle eine Farbe geändert werden, die dann Auswirkungen auf alle Elemente der App hat, die diese Farbe referenzieren. 
 

@@ -2,22 +2,24 @@
 
 # Einleitung
 
-Um die vielseitigen Einsätze der Feuerwehr ein Stück weit einfacher zu machen, existiert die im folgenden beschriebene App 
-`DEIS - Digitales Einsatz-InformationsSystem`
+Um die vielseitigen Einsätze der Feuerwehr ein Stück weit einfacher zu machen, existiert die im folgenden beschriebene Tablet-App 
+`DEIS - Digitales Einsatz-InformationsSystem`. Sie ist ein individuell auf den Feuerwehreinsatz angepasst File-Manager, der aber noch mehr kann!
 
-## Rettungskarten
+## Rettungskarten für den Feuerwehreinsatz
 
 Unfallbergung, aber auch die klassische Brandbekämpfung sind in Feuerwehren an der Tagesordnung. Hierfür ist es unerlässlich, genauestens informiert zu sein, wie das Menschenleben schnellstmöglich gerettet werden kann. Dafür gibt es zum Beispiel sogenannte *Rettungskarten*. Eine mögliche Rettungskarte ist eine Informationskarte über verschiedene Automodelle, in denen beschrieben ist, wie das jeweilige Automodell aufgebaut ist, wo man das Auto im Ernstfall aufschneiden kann um einen Menschen zu bergen, wo sich Tragsäulen des Autos befinden und vieles mehr.
 
-Eine andere Rettungskarte ist eine Landkarte, auf der alle Hydranten der Umgebung eingetragen sind. Sie kann auch Informationen über die Kanalisation des Einsatzgebiets enthalten, sowie genaue Straßen- und U-Bahn Karten. Eine andere Rettungskarte könnte wiederum Gebäudepläne enthalten, die im Falle eines Brandes Leben retten – da die Einsatzkräfte genau wissen, wo sie im Gebäude hinmüssen. Dies könnte zum Beispiel ein Gebäudeplan eines Krankenhauses, Altenheime oder einer Schule sein.
+Eine andere Rettungskarte ist eine Landkarte, auf der alle Hydranten der Umgebung eingetragen sind. Sie kann auch Informationen über die Kanalisation des Einsatzgebiets enthalten, sowie genaue Straßen- und U-Bahn Karten. Eine wieder andere Rettungskarte könnte  Gebäudepläne enthalten, die im Falle eines Brandes Leben retten – da die Einsatzkräfte genau wissen, wo sie im Gebäude hinmüssen. Dies könnte zum Beispiel ein Gebäudeplan eines Krankenhauses, Altenheime oder einer Schule sein.
 
 ## Einsatzzweck von DEIS
 
 All diese Dokumente liegen oftmals nicht digital vor, sondern werden als tatsächliche Papier Karten bei Einsätzen in unzähligen Ordnern mitgeführt. Es bedarf dann eines echten Profis, die jeweilige Rettungskarte schnellstmöglich herauszusuchen und den Einsatzkräften zur Verfügung zu stellen.
 
-Mittlerweile sind viele dieser Dokumente aber tatsächlich schon digital verfügbar oder können mit einfachen Mitteln digitalisiert werden, sodass sie beispielsweise auf einem Tablet von einem File Manager aufgerufen werden könnten.
+Mittlerweile sind viele dieser Dokumente aber tatsächlich schon digital verfügbar oder können mit einfachen Mitteln digitalisiert werden, sodass sie beispielsweise auf einem Tablet von einer `File Manager`-App aufgerufen werden könnten.
 
-In der Praxis stellt sich aber heraus, dass bisher kein solcher File Manager existiert, der den besonderen Anforderungen eines Feuerwehreinsatzes gerecht wird. An diesem Punkt setzt DEIS ein.
+In der Praxis stellt sich aber heraus, dass bisher kein solcher `File Manager` existiert, der den besonderen Anforderungen eines Feuerwehreinsatzes gerecht wird. An diesem Punkt setzt DEIS ein.
+
+### Kernfunktionen
 
 DEIS ist auf jeden Einsatz speziell ausgelegt, d.h. es kann innerhalb von Sekunden die jeweils richtigen Dokumente bereitstellen. Dies funktioniert durch 
 - eine einfache, übersichtliche und unmissverständliche Oberfläche
@@ -31,9 +33,9 @@ DEIS ist auf jeden Einsatz speziell ausgelegt, d.h. es kann innerhalb von Sekund
 - absolut robust
 - offline-only, keine Netzverbindung nötig.
 
-## Individualisierung
+### Individuell auf die eigene Feuerwehr zuschneidbar
 
-Die App ist außerdem durch die Ordner- und Dokumentenstruktur individuell anpassbar und durch die Konfigurationsdateien können sehr einfach Layout und Funktion verändert werden. So können sind beispielsweise auch sehr simpel neue Schaltflächen erstellt werden.
+Die App ist durch die Ordner- und Dokumentenstruktur individuell auf die Anforderungen der eigenen Feuerwehr anpassbar und durch die Konfigurationsdateien können sehr einfach Layout und Funktion verändert werden. So können sind beispielsweise auch sehr simpel neue Schaltflächen erstellt werden.
 
 Die Anpassungen können (außerhalb des Einsatzes natürlich) schnell durchgeführt werden und so ist die App immer an die Bedürfnisse der jeweiligen Feuerwehr abgestimmt.
 
@@ -51,7 +53,7 @@ Zunächst wird das Tablet per USB-Kabel an einen Rechner angeschlossen. Nun kann
 
 ausgeführt. Die App installiert sich nun auf dem Gerät. Nach erfolgreicher Installation öffnet sich die App und fragt den Benutzer nach der Berechtigung, auf den Telefonspeicher zugreifen zu dürfen. Dies sollte mit “Ja” beantwortet werden.
 
-Die App meldet nun, dass sie keine passende Ordnerstruktur im Telefonspeicher finden kann und fordert den Nutzer auf, die entsprechende Ordnerstruktur anzulegen. Der Nutzer nimmt nun das der APK beiliegende .zip-Archiv und entpackt es auf dem Rechner. Darin befindet sich ein Ordner “deis”, der wiederum zwei Unterordner hat: `data` und `config`
+Die App meldet nun, dass sie keine passende Ordnerstruktur im Telefonspeicher finden kann und fordert den Nutzer auf, die entsprechende Ordnerstruktur anzulegen. Der Nutzer nimmt nun das der APK beiliegende .zip-Archiv und entpackt es auf dem Rechner. Darin befindet sich ein Ordner `deis`, der wiederum zwei Unterordner hat: `data` und `config`
 
 ### Nutzdaten
 Der Nutzer legt die Daten, die er als Nutzdaten auf dem Tablet verwenden möchte, im Ordner “data” ab. Diese sind beispielsweise Rettungskarten in pdf-Format (siehe Abb.1) oder neue Ordner Er kann dabei beliebig viele verschachtelte Unterordner einrichten und PDFs einkopieren. Jeder (Unter-)Ordner wird in der App intuitiv als eine Menüebene dargestellt.
@@ -59,10 +61,10 @@ Der Nutzer legt die Daten, die er als Nutzdaten auf dem Tablet verwenden möchte
 ![Rettungskarte eines Audis](https://i.imgur.com/v66pB8g.png)
 
 ### Konfigurationsdateien
-Zunächst wird unterschieden zwischen globalen und dateispezifischen Konfigurationsdateien. Im Ordner `config` liegen die beiden globalen XML-Dateien `colors.cfg` und “defaults.cfg”. 
+Zunächst wird unterschieden zwischen globalen und dateispezifischen Konfigurationsdateien. Im Ordner `config` liegen die beiden globalen XML-Dateien `colors.cfg` und `defaults.cfg`. 
 
 #### colors.cfg
-In der Datei `colors.cfg` können Farbwerte in Form von HEX-Werten abgespeichert werden und zugehörige Alias vergeben werden. Das dient dazu, dass ein festes Farbenset für eine App definiert werden kann, welches dann in allen anderen Konfigurationsdateien verwendet werden kann, ohne dass sich der genaue HEX-Wert gemerkt werden muss (aus #FFFFFF wird z.B. white). 
+In der Datei `colors.cfg` können Farbwerte in Form von HEX-Werten abgespeichert werden und zugehörige Alias vergeben werden. Das dient dazu, dass ein festes Farbenset für eine App definiert werden kann, welches dann in allen anderen Konfigurationsdateien verwendet werden kann, ohne dass sich der genaue HEX-Wert gemerkt werden muss (aus `#FFFFFF` wird z.B. `white`). 
 
 Des Weiteren kann so an einer zentralen Stelle eine Farbe geändert werden, die dann Auswirkungen auf alle Elemente der App hat, die diese Farbe referenzieren. 
 

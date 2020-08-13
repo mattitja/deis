@@ -48,7 +48,9 @@ Die Verwendung der DEIS-App erfolgt grundsätzlich in zwei Phasen. Der *Konfigur
 ## Konfiguration
 Die App besteht aus drei Bestandteilen. Der Applikationsdatei (kurz APK), die auf dem Android-Tablet installiert werden kann, den anzuzeigenden Nutzdaten in Form von Ordnern und PDFs, und den Konfigurationsdateien, die für die visuelle Darstellung der App und der einzelnen Elemente verantwortlich sind.
 
-Die aktuellste APK und Beispielinhalte (Inhalte der Feuerwehr Aumühle) können hier heruntergeladen werden: https://drive.google.com/drive/folders/1cy1U9ckWzk7hf8zfkomYB0bUvwmgA1Y9?usp=sharing
+Die aktuellste APK und Beispielinhalte (Inhalte der Feuerwehr Aumühle) können hier heruntergeladen werden: 
+
+https://drive.google.com/drive/folders/1cy1U9ckWzk7hf8zfkomYB0bUvwmgA1Y9?usp=sharing
 
 ### APK
 Zunächst wird das Tablet per USB-Kabel an einen Rechner angeschlossen. Nun kann per Android Device Bridge (ADB) die APK auf dem Gerät installiert werden. Dazu wird in der Kommandozeile des Rechners in das Verzeichnis der APK gewechselt und dann der Befehl

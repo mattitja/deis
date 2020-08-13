@@ -46,9 +46,12 @@ Die Anpassungen können (außerhalb des Einsatzes natürlich) schnell durchgefü
 Die Verwendung der DEIS-App erfolgt grundsätzlich in zwei Phasen. Der *Konfigurationsphase* und der *Einsatzphase*. Die App kann erst mit auf den Einsatz genommen werden, wenn sie konfiguriert wurde.
 
 ## Konfiguration
-Die App besteht aus drei Bestandteilen. Der Applikationsdatei (kurz APK), die auf dem Android-Tablet installiert werden kann, den anzuzeigenden Nutzdaten in Form von Ordnern und PDFs, und den Konfigurationsdateien, die für die visuelle Darstellung der App und der einzelnen Elemente verantwortlich sind.
+Die App besteht aus drei Bestandteilen. 
+- Der Applikationsdatei (kurz APK), die auf dem Android-Tablet installiert werden kann, 
+- den anzuzeigenden Nutzdaten in Form von Ordnern und PDFs, 
+- und den Konfigurationsdateien, die für die visuelle Darstellung der App und der einzelnen Elemente verantwortlich sind.
 
-Die aktuellste APK und Beispielinhalte (Inhalte der Feuerwehr Aumühle) können hier heruntergeladen werden: 
+Die aktuellste APK und Beispielinhalte für Nutz- und Konfigurationsdaten (Inhalte der Feuerwehr Aumühle) können hier heruntergeladen werden: 
 https://drive.google.com/drive/folders/1cy1U9ckWzk7hf8zfkomYB0bUvwmgA1Y9?usp=sharing
 
 ### APK

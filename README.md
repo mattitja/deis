@@ -65,7 +65,7 @@ Ja” beantwortet werden.
 Die App meldet nun, dass sie keine passende Ordnerstruktur im Telefonspeicher finden kann und fordert den Nutzer auf, die entsprechende Ordnerstruktur anzulegen. Der Nutzer nimmt nun das der APK beiliegende .zip-Archiv und entpackt es auf dem Rechner. Darin befindet sich ein Ordner `deis`, der wiederum zwei Unterordner hat: `data` und `config`
 
 ### Nutzdaten
-Der Nutzer legt die Daten, die er als Nutzdaten auf dem Tablet verwenden möchte, im Ordner `data` ab. Diese sind beispielsweise Rettungskarten in pdf-Format (siehe Abb.1) oder neue Ordner Er kann dabei beliebig viele verschachtelte Unterordner einrichten und PDFs einkopieren. Jeder (Unter-)Ordner wird in der App intuitiv als eine Menüebene dargestellt.
+Der Nutzer legt die Daten, die er als Nutzdaten auf dem Tablet verwenden möchte, im Ordner `data` ab. Diese sind beispielsweise Rettungskarten in pdf-Format oder neue Ordner Er kann dabei beliebig viele verschachtelte Unterordner einrichten und PDFs einkopieren. Jeder (Unter-)Ordner wird in der App intuitiv als eine Menüebene dargestellt.
 
 ![Rettungskarte eines Audis](https://i.imgur.com/v66pB8g.png)
 
@@ -133,7 +133,7 @@ Nach Öffnen der App erscheint ein 2-Sekündiger Start-Screen, der das Logo von 
 
 ![](https://i.imgur.com/joqxjsE.png)
 
-Anschließend öffnet sich die Schaltflächenübersicht der untersten Menüebene. Die zuvor konfigurierten Buttons sind nun hier zu sehen, mit zugehörigen dahinterliegenden Ordnern, Dokumenten und Links (siehe Abb. 3).
+Anschließend öffnet sich die Schaltflächenübersicht der untersten Menüebene. Die zuvor konfigurierten Buttons sind nun hier zu sehen, mit zugehörigen dahinterliegenden Ordnern, Dokumenten und Links.
 
 ![](https://i.imgur.com/gLLW7zQ.png)
 
@@ -156,7 +156,7 @@ Eine Schaltfläche besteht aus folgenden Komponenten:
 - dem Icon
 - dem Dokumentenart-Icon (klein links oben)
 
-Dies würde man in der `RettungskartenOrdnername.cfg` so realisieren:
+Dies würde man in der `Rettungskarten.cfg` so realisieren:
 
 ```
 <?xml version="1.0" encoding="utf-8"?>

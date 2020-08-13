@@ -2,20 +2,36 @@
 
 # Einleitung
 
-Um die vielseitigen Einsätze der Feuerwehr ein Stück weit einfacher zu machen, existiert die im folgenden beschriebene App „DEIS – DIGITALES EINSATZ INFORMATIONS SYSTEM“. Feuerwehreinsätze drehen sich meist um die Rettung von Menschenleben. Dies kann jedoch ganz unterschiedlicher Natur sein. 
+Um die vielseitigen Einsätze der Feuerwehr ein Stück weit einfacher zu machen, existiert die im folgenden beschriebene App 
+`DEIS - Digitales Einsatz-InformationsSystem`
 
-Zum einen sind Unfallbergung aber auch die klassische Brandbekämpfung an der Tagesordnung. Hierfür ist es unerlässlich, genauestens informiert zu sein, wie das Menschenleben schnellstmöglich gerettet werden kann. Dafür gibt es zum Beispiel sogenannte Rettungskarten. Eine mögliche Rettungskarte ist eine Informationskarte über verschiedene Automodelle, in denen beschrieben ist, wie das jeweilige Automodell aufgebaut ist, wo man das Auto im Ernstfall aufschneiden kann um einen Menschen zu bergen, wo sich Tragsäulen des Autos befinden und vieles mehr.
+## Rettungskarten
+
+Unfallbergung, aber auch die klassische Brandbekämpfung sind in Feuerwehren an der Tagesordnung. Hierfür ist es unerlässlich, genauestens informiert zu sein, wie das Menschenleben schnellstmöglich gerettet werden kann. Dafür gibt es zum Beispiel sogenannte *Rettungskarten*. Eine mögliche Rettungskarte ist eine Informationskarte über verschiedene Automodelle, in denen beschrieben ist, wie das jeweilige Automodell aufgebaut ist, wo man das Auto im Ernstfall aufschneiden kann um einen Menschen zu bergen, wo sich Tragsäulen des Autos befinden und vieles mehr.
 
 Eine andere Rettungskarte ist eine Landkarte, auf der alle Hydranten der Umgebung eingetragen sind. Sie kann auch Informationen über die Kanalisation des Einsatzgebiets enthalten, sowie genaue Straßen- und U-Bahn Karten. Eine andere Rettungskarte könnte wiederum Gebäudepläne enthalten, die im Falle eines Brandes Leben retten – da die Einsatzkräfte genau wissen, wo sie im Gebäude hinmüssen. Dies könnte zum Beispiel ein Gebäudeplan eines Krankenhauses, Altenheime oder einer Schule sein.
 
+## Einsatzzweck von DEIS
+
 All diese Dokumente liegen oftmals nicht digital vor, sondern werden als tatsächliche Papier Karten bei Einsätzen in unzähligen Ordnern mitgeführt. Es bedarf dann eines echten Profis, die jeweilige Rettungskarte schnellstmöglich herauszusuchen und den Einsatzkräften zur Verfügung zu stellen.
+
 Mittlerweile sind viele dieser Dokumente aber tatsächlich schon digital verfügbar oder können mit einfachen Mitteln digitalisiert werden, sodass sie beispielsweise auf einem Tablet von einem File Manager aufgerufen werden könnten.
 
 In der Praxis stellt sich aber heraus, dass bisher kein solcher File Manager existiert, der den besonderen Anforderungen eines Feuerwehreinsatzes gerecht wird. An diesem Punkt setzt DEIS ein.
 
-DEIS ist auf jeden Einsatz speziell ausgelegt, d.h. es kann innerhalb von Sekunden die jeweils richtigen Dokumente bereitstellen. Dies funktioniert durch eine einfache, übersichtliche und unmissverständliche Oberfläche, mit großen Schaltflächen (die auch im Eifer des Gefechts unfehlbar sind), klarer Schrift, starker Kontraste und ohne Schnörkeleien, die nur zu Platzverschwendung und Ablenkung führen würden. Die Menüführung ist einfach und intuitiv. Die App kann sich nicht aus Versehen schließen (dies wäre im Ernstfall fatal) und enthält keine Medienbrüche (wie Sprünge von File Manager in PDF Viewer). Sie ist robust und darf keine unerwarteten Zustände einnehmen.
+DEIS ist auf jeden Einsatz speziell ausgelegt, d.h. es kann innerhalb von Sekunden die jeweils richtigen Dokumente bereitstellen. Dies funktioniert durch 
+- eine einfache, übersichtliche und unmissverständliche Oberfläche
+- große Schaltflächen (die auch im Eifer des Gefechts unfehlbar sind)
+- klare Schrift
+- starken Kontraste und ohne Schnörkeleien
+- einfache Menüführung
+- kein versehentliches Schließen der App (dies wäre im Ernstfall fatal)
+- keine Medienbrüche (wie Sprünge von File Manager in PDF Viewer)
+- keine unerwarteten Zustände
+- absolut robust
+- offline-only, keine Netzverbindung nötig.
 
-Ein weiterer wichtiger Punkt ist die offline-Fähigkeit der App. Diese ist von äußerster Notwendigkeit, da es immer noch in vielen Teilen des Landes kein ausreichend gutes bis gar kein Netz gibt, wie zum Beispiel in Wäldern oder unterirdisch in Kanalsystemen.
+## Individualisierung
 
 Die App ist außerdem durch die Ordner- und Dokumentenstruktur individuell anpassbar und durch die Konfigurationsdateien können sehr einfach Layout und Funktion verändert werden. So können sind beispielsweise auch sehr simpel neue Schaltflächen erstellt werden.
 
@@ -45,7 +61,7 @@ Der Nutzer legt die Daten, die er als Nutzdaten auf dem Tablet verwenden möchte
 ### Konfigurationsdateien
 Zunächst wird unterschieden zwischen globalen und dateispezifischen Konfigurationsdateien. Im Ordner `config` liegen die beiden globalen XML-Dateien `colors.cfg` und “defaults.cfg”. 
 
-##### colors.cfg
+#### colors.cfg
 In der Datei `colors.cfg` können Farbwerte in Form von HEX-Werten abgespeichert werden und zugehörige Alias vergeben werden. Das dient dazu, dass ein festes Farbenset für eine App definiert werden kann, welches dann in allen anderen Konfigurationsdateien verwendet werden kann, ohne dass sich der genaue HEX-Wert gemerkt werden muss (aus #FFFFFF wird z.B. white). 
 
 Des Weiteren kann so an einer zentralen Stelle eine Farbe geändert werden, die dann Auswirkungen auf alle Elemente der App hat, die diese Farbe referenzieren. 
@@ -66,10 +82,12 @@ Wie schon angedeutet, verwendet DEIS das Prinzip der Vererbung. Die Werte in der
 ### Icons
 Jede Schaltfläche kann mit einem individuellen Icon versehen werden. Die Icons müssen im .png-Format im Ordner `config/icons` abgelegt werden und können dann aus den Konfigurationsdateien mit dem Dateinamen ohne Endung referenziert werden. Dies sieht so aus:
 
-`<item>
+```
+<item>
   <icon>notausgang</icon>
   …
-</item>`
+</item>
+```
 
 Hier wird die Datei `config/icons/notausgang.png` referenziert. Das Format PNG wird verwendet, damit Transparenzen möglich sind.
 
@@ -96,7 +114,6 @@ Der gesamte Ordner wird nun übertragen. Alternativ kann das Tablet (unter Windo
 
 ### Aktualisieren der Ordnerstruktur
 Wenn irgendwelche Änderungen an der Ordnerstruktur vorgenommen werden und die App bereits läuft, muss sie, bevor die Änderungen übernommen werden, einmal hart beendet und wieder neugestartet werden. Denn erst beim App-Start wird die Ordnerstruktur komplett neu eingeladen.
-
 
 ## Einsatzphase
 Das Tablet ist nun für den Einsatz konfiguriert. Dieses Kapitel beschreibt die Benutzung der fertig konfigurierten App.
@@ -130,13 +147,15 @@ Eine Schaltfläche besteht aus folgenden Komponenten:
 
 Dies würde man in der `RettungskartenOrdnername.cfg` so realisieren:
 
-`<?xml version="1.0" encoding="utf-8"?>
+```
+<?xml version="1.0" encoding="utf-8"?>
   <item>
     <displayName>Rettungskarten</displayName>
     <buttonColor>yellow</buttonColor>
     <textColor>black</textColor>
   <icon>autounfall</icon>
-</item>`
+</item>
+```
 
 Daraus entsteht die gelbe `Rettungskarten` Schaltfläche in folgender Abbildung.
 

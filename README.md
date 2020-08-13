@@ -36,8 +36,8 @@ Die App meldet nun, dass sie keine passende Ordnerstruktur im Telefonspeicher fi
 ### Nutzdaten
 Der Nutzer legt die Daten, die er als Nutzdaten auf dem Tablet verwenden möchte, im Ordner “data” ab. Diese sind beispielsweise Rettungskarten in pdf-Format (siehe Abb.1) oder neue Ordner Er kann dabei beliebig viele verschachtelte Unterordner einrichten und PDFs einkopieren. Jeder (Unter-)Ordner wird in der App intuitiv als eine Menüebene dargestellt.
 
-
-Abb.: 1 Rettungskarte eines Audis
+![GitHub Logo](https://i.imgur.com/v66pB8g.png)
+Format: ![Rettungskarte eines Audis](url)
 
 ### Konfigurationsdateien
 Zunächst wird unterschieden zwischen globalen und dateispezifischen Konfigurationsdateien. Im Ordner “config” liegen die beiden globalen XML-Dateien “colors.cfg” und “defaults.cfg”. 
@@ -46,10 +46,9 @@ Zunächst wird unterschieden zwischen globalen und dateispezifischen Konfigurati
 In der Datei „colors.cfg“ können Farbwerte in Form von HEX-Werten abgespeichert werden und zugehörige Alias vergeben werden. Das dient dazu, dass ein festes Farbenset für eine App definiert werden kann, welches dann in allen anderen Konfigurationsdateien verwendet werden kann, ohne dass sich der genaue HEX-Wert gemerkt werden muss (aus #FFFFFF wird z.B. white). 
 Des Weiteren kann so an einer zentralen Stelle eine Farbe geändert werden, die dann Auswirkungen auf alle Elemente der App hat, die diese Farbe referenzieren. 
 
-2.1.3.2 default.cfg
+#### default.cfg
 In der „defaults.cfg“ werden Standard-Einstellungen für die App getroffen, die teilweise von dateispezifischen Konfigurationsdateien überschrieben werden können, aber nicht müssen. So müssen hier Farbwerte (als HEX oder Alias) für Schaltflächenfarben, Textfarben und Schaltflächen-Icons definiert werden. Diese Werte können später überschrieben werden. Des Weiteren werden hier aber auch die Hintergrundfarben für die Menüleiste und den allgemeinen Hintergrund festgelegt. Diese Datei muss existieren und gültige Werte enthalten, da sie als „Fallback“ genutzt werden, falls keine dateispezifische Konfiguration vorliegt.
-
-2.1.3.3 datei_abc.cfg
+#### datei_abc.cfg
 Dateispezifische Konfigurationsdateien werden nicht im Ordner “config” abgelegt, sondern direkt in die Nutzdatenstruktur “data” selbst, damit die Konfiguration von einzelnen Dateien möglichst intuitiv ist. Eine Datei (ein Ordner, ein PDF oder ein App-Link) zieht dann eine Konfiguration an, wenn eine Datei mit dem exakt gleichen Namen existiert, nur als Endung .cfg besitzt.
 
 Beispiel: “HydrantenkarteHamburg2018.pdf” wird konfiguriert durch die Datei “HydrantenkarteHamburg2018.cfg”.

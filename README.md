@@ -3,6 +3,7 @@
 # Einleitung
 
 Um die vielseitigen Einsätze der Feuerwehr ein Stück weit einfacher zu machen, existiert die im folgenden beschriebene App „DEIS – DIGITALES EINSATZ INFORMATIONS SYSTEM“. Feuerwehreinsätze drehen sich meist um die Rettung von Menschenleben. Dies kann jedoch ganz unterschiedlicher Natur sein. 
+
 Zum einen sind Unfallbergung aber auch die klassische Brandbekämpfung an der Tagesordnung. Hierfür ist es unerlässlich, genauestens informiert zu sein, wie das Menschenleben schnellstmöglich gerettet werden kann. Dafür gibt es zum Beispiel sogenannte Rettungskarten. Eine mögliche Rettungskarte ist eine Informationskarte über verschiedene Automodelle, in denen beschrieben ist, wie das jeweilige Automodell aufgebaut ist, wo man das Auto im Ernstfall aufschneiden kann um einen Menschen zu bergen, wo sich Tragsäulen des Autos befinden und vieles mehr.
 
 Eine andere Rettungskarte ist eine Landkarte, auf der alle Hydranten der Umgebung eingetragen sind. Sie kann auch Informationen über die Kanalisation des Einsatzgebiets enthalten, sowie genaue Straßen- und U-Bahn Karten. Eine andere Rettungskarte könnte wiederum Gebäudepläne enthalten, die im Falle eines Brandes Leben retten – da die Einsatzkräfte genau wissen, wo sie im Gebäude hinmüssen. Dies könnte zum Beispiel ein Gebäudeplan eines Krankenhauses, Altenheime oder einer Schule sein.
@@ -17,11 +18,12 @@ DEIS ist auf jeden Einsatz speziell ausgelegt, d.h. es kann innerhalb von Sekund
 Ein weiterer wichtiger Punkt ist die offline-Fähigkeit der App. Diese ist von äußerster Notwendigkeit, da es immer noch in vielen Teilen des Landes kein ausreichend gutes bis gar kein Netz gibt, wie zum Beispiel in Wäldern oder unterirdisch in Kanalsystemen.
 
 Die App ist außerdem durch die Ordner- und Dokumentenstruktur individuell anpassbar und durch die Konfigurationsdateien können sehr einfach Layout und Funktion verändert werden. So können sind beispielsweise auch sehr simpel neue Schaltflächen erstellt werden.
+
 Die Anpassungen können (außerhalb des Einsatzes natürlich) schnell durchgeführt werden und so ist die App immer an die Bedürfnisse der jeweiligen Feuerwehr abgestimmt.
 
 # Bedienungsanleitung
 
-Die Verwendung der DEIS-App erfolgt grundsätzlich in zwei Phasen. Der Konfigurationsphase und der Einsatzphase. Die App kann erst mit auf den Einsatz genommen werden, wenn sie konfiguriert wurde.
+Die Verwendung der DEIS-App erfolgt grundsätzlich in zwei Phasen. Der *Konfigurationsphase* und der Einsatzphase. Die App kann erst mit auf den Einsatz genommen werden, wenn sie konfiguriert wurde.
 
 ## Konfiguration
 Die App besteht aus drei Bestandteilen. Der Applikationsdatei (kurz APK), die auf dem Android-Tablet installiert werden kann, den anzuzeigenden Nutzdaten in Form von Ordnern und PDFs, und den Konfigurationsdateien, die für die visuelle Darstellung der App und der einzelnen Elemente verantwortlich sind.
@@ -29,7 +31,7 @@ Die App besteht aus drei Bestandteilen. Der Applikationsdatei (kurz APK), die au
 ### APK
 Zunächst wird das Tablet per USB-Kabel an einen Rechner angeschlossen. Nun kann per Android Device Bridge (ADB) die APK auf dem Gerät installiert werden. Dazu wird in der Kommandozeile des Rechners in das Verzeichnis der APK gewechselt und dann der Befehl
 
-adb install deis.apk
+`adb install deis.apk`
 
 ausgeführt. Die App installiert sich nun auf dem Gerät. Nach erfolgreicher Installation öffnet sich die App und fragt den Benutzer nach der Berechtigung, auf den Telefonspeicher zugreifen zu dürfen. Dies sollte mit “Ja” beantwortet werden.
 

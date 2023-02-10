@@ -1,6 +1,6 @@
 package de.miroit.deis.manager;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.util.Collections;

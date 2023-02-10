@@ -9,7 +9,7 @@ android {
         targetSdkVersion 28
         versionCode 2
         versionName "1.11"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
                 includeCompileClasspath = true
@@ -30,13 +30,13 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.1', {
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
-    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.github.TalbotGooday:AndroidPdfViewer:3.1.0-beta.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     annotationProcessor 'org.androidannotations:androidannotations:4.6.0'
     implementation 'org.androidannotations:androidannotations-api:4.6.0'
     testImplementation 'junit:junit:4.12'

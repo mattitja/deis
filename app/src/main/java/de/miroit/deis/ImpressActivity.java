@@ -1,8 +1,9 @@
 package de.miroit.deis;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import de.miroit.deis.helper.Utils;
 import de.miroit.deis.manager.GlobalConfigurationsManager;

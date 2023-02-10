@@ -3,9 +3,10 @@ package de.miroit.deis.helper;
 
 import android.app.Activity;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.ActionBar;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.ActionBar;
 
 /**
  * Created by mmi on 19.02.2017.

@@ -11,7 +11,12 @@ android {
         versionName "1.11"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
-            annotationProcessorOptions.includeCompileClasspath = true
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+                arguments = [
+                        "androidManifestFile":"$projectDir/src/main/AndroidManifest.xml".toString()
+                ]
+            }
         }
 
     }

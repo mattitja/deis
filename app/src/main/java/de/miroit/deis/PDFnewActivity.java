@@ -172,7 +172,7 @@ public class PDFnewActivity extends AppCompatActivity implements OnPageChangeLis
 			Cursor cursor = getContentResolver().query(uri, null, null, null, null);
 			try {
 				if (cursor != null && cursor.moveToFirst()) {
-					result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+					result = cursor.getString(cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME));
 				}
 			} finally {
 				if (cursor != null) {
